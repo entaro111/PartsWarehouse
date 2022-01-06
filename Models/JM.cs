@@ -23,7 +23,7 @@ namespace PartsWarehouse.Models
     
         public int Id_JM { get; set; }
         [Required(ErrorMessage = "Podaj jednostkê")]
-        [StringLength(50)]
+        [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
         public string Nazwa { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

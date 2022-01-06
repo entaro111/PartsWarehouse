@@ -25,17 +25,17 @@ namespace PartsWarehouse.Models
     
         public int Id_Kartoteki { get; set; }
         [Required(ErrorMessage = "Podaj nazwê czêœci")]
-        [StringLength(50)]
+        [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
         public string Nazwa { get; set; }
         [Required(ErrorMessage = "Podaj stan")]
         public int Stan { get; set; }
         [Required(ErrorMessage = "Podaj miejsce sk³adowania")]
-        [StringLength(50)]
+        [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
         public string Miejsce { get; set; }
         public int Id_JM { get; set; }
         public Nullable<int> Id_Dostawcy { get; set; }
         [Required(ErrorMessage = "Podaj kod kartoteki")]
-        [StringLength(50)]
+        [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
         public string Kod { get; set; }
     
         public virtual Dostawcy Dostawcy { get; set; }

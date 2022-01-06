@@ -22,11 +22,12 @@ namespace PartsWarehouse.Models
         }
     
         public int Id_Dostawcy { get; set; }
-        [StringLength(50)]
+        [Required(ErrorMessage = "Podaj nazwê dostawcy")]
+        [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
         public string Nazwa { get; set; }
-        [StringLength(50)]
+        [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
         public string Miejscowosc { get; set; }
-        [StringLength(6)]
+        [StringLength(6, ErrorMessage = "Maksymalnie 6 znaków")]
         public string Kod { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

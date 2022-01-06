@@ -23,10 +23,10 @@ namespace PartsWarehouse.Models
     
         public int Id_Osoby { get; set; }
         [Required(ErrorMessage = "Podaj imiê")]
-        [StringLength(50)]
+        [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
         public string Imie { get; set; }
         [Required(ErrorMessage = "Podaj nazwisko")]
-        [StringLength(50)]
+        [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
         public string Nazwisko { get; set; }
         public Nullable<int> Id_Dzial { get; set; }
     

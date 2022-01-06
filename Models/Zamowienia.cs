@@ -17,6 +17,8 @@ namespace PartsWarehouse.Models
     {
         public int Id_Zamowienia { get; set; }
         [Required(ErrorMessage = "Podaj datê")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode =true)]
         public System.DateTime Data_zamowienia { get; set; }
         [Required(ErrorMessage = "Zrealizowane?")]
         public bool Realizacja { get; set; }

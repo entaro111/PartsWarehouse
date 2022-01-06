@@ -18,6 +18,8 @@ namespace PartsWarehouse.Models
         public int Id_Przyjecia { get; set; }
         [Required(ErrorMessage = "Podaj iloœæ")]
         public int Ilosc { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime Data_Przyjecia { get; set; }
         public int Id_Kartoteki { get; set; }
     

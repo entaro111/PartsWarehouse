@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MagazynDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MagazynDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Dostawcy">
           <Key>
             <PropertyRef Name="Id_Dostawcy" />
@@ -35,9 +35,10 @@
           <Property Name="Id_Kartoteki" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nazwa" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Stan" Type="int" Nullable="false" />
-          <Property Name="Miejsce" Type="nvarchar" MaxLength="50" />
+          <Property Name="Miejsce" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Id_JM" Type="int" Nullable="false" />
           <Property Name="Id_Dostawcy" Type="int" />
+          <Property Name="Kod" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="MPK">
           <Key>
@@ -223,8 +224,7 @@
             <End Role="Zamowienia" EntitySet="Zamowienia" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MagazynDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -261,7 +261,7 @@
           <Property Name="Id_Kartoteki" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Stan" Type="Int32" Nullable="false" />
-          <Property Name="Miejsce" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Miejsce" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Id_JM" Type="Int32" Nullable="false" />
           <Property Name="Id_Dostawcy" Type="Int32" />
           <NavigationProperty Name="Dostawcy" Relationship="Self.FK__Kartoteki__Id_Do__5812160E" FromRole="Kartoteki" ToRole="Dostawcy" />
@@ -269,6 +269,7 @@
           <NavigationProperty Name="Przyjecia" Relationship="Self.FK__Przyjecia__Id_Ka__01142BA1" FromRole="Kartoteki" ToRole="Przyjecia" />
           <NavigationProperty Name="Wydania" Relationship="Self.FK__Wydania__Id_Kart__5629CD9C" FromRole="Kartoteki" ToRole="Wydania" />
           <NavigationProperty Name="Zamowienia" Relationship="Self.FK__Zamowieni__Id_Ka__59063A47" FromRole="Kartoteki" ToRole="Zamowienia" />
+          <Property Name="Kod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="MPK">
           <Key>
@@ -497,6 +498,7 @@
           <EntitySetMapping Name="Kartoteki">
             <EntityTypeMapping TypeName="MagazynDBModel.Kartoteki">
               <MappingFragment StoreEntitySet="Kartoteki">
+                <ScalarProperty Name="Kod" ColumnName="Kod" />
                 <ScalarProperty Name="Id_Kartoteki" ColumnName="Id_Kartoteki" />
                 <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
                 <ScalarProperty Name="Stan" ColumnName="Stan" />

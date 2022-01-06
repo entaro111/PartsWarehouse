@@ -28,6 +28,7 @@ namespace PartsWarehouse.Models
         public string Miejsce { get; set; }
         public int Id_JM { get; set; }
         public Nullable<int> Id_Dostawcy { get; set; }
+        public string Kod { get; set; }
     
         public virtual Dostawcy Dostawcy { get; set; }
         public virtual JM JM { get; set; }

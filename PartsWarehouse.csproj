@@ -234,11 +234,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Kartoteki\Create.cshtml" />
-    <Content Include="Views\Kartoteki\Delete.cshtml" />
-    <Content Include="Views\Kartoteki\Details.cshtml" />
-    <Content Include="Views\Kartoteki\Edit.cshtml" />
-    <Content Include="Views\Kartoteki\Index.cshtml" />
     <Content Include="Views\Dostawcy\Create.cshtml" />
     <Content Include="Views\Dostawcy\Delete.cshtml" />
     <Content Include="Views\Dostawcy\Details.cshtml" />
@@ -259,6 +254,11 @@
     <Content Include="Views\Wydania\Details.cshtml" />
     <Content Include="Views\Wydania\Edit.cshtml" />
     <Content Include="Views\Wydania\Index.cshtml" />
+    <Content Include="Views\Kartoteki\Create.cshtml" />
+    <Content Include="Views\Kartoteki\Delete.cshtml" />
+    <Content Include="Views\Kartoteki\Details.cshtml" />
+    <Content Include="Views\Kartoteki\Edit.cshtml" />
+    <Content Include="Views\Kartoteki\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

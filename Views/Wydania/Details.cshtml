@@ -1,0 +1,58 @@
+﻿@model PartsWarehouse.Models.Wydania
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Wydania</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ilosc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ilosc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_Wydania)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_Wydania)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kartoteki.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kartoteki.Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MPK.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MPK.Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Osoby.Imie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Osoby.Imie)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Wydania }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

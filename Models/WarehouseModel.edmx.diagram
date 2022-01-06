@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d670ae4437744323bd1fbd07757abcb7" Name="Diagram1" ZoomLevel="62">
+        <EntityTypeShape EntityType="MagazynDBModel.Dostawcy" Width="1.5" PointX="0.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MagazynDBModel.Dzialy" Width="1.5" PointX="9.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MagazynDBModel.JM" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MagazynDBModel.Kartoteki" Width="1.5" PointX="3.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MagazynDBModel.MPK" Width="1.5" PointX="6.375" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MagazynDBModel.Osoby" Width="1.5" PointX="7.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MagazynDBModel.Przyjecia" Width="1.5" PointX="5.625" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MagazynDBModel.Wydania" Width="1.5" PointX="4.125" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MagazynDBModel.Zamowienia" Width="1.5" PointX="8.125" PointY="2.625" IsExpanded="true" />
+        <AssociationConnector Association="MagazynDBModel.FK__Kartoteki__Id_Do__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="MagazynDBModel.FK__Osoby__Id_Dzial__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="MagazynDBModel.FK__Kartoteki__Id_JM__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="MagazynDBModel.FK__Przyjecia__Id_Ka__01142BA1" ManuallyRouted="false" />
+        <AssociationConnector Association="MagazynDBModel.FK__Wydania__Id_Kart__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="MagazynDBModel.FK__Zamowieni__Id_Ka__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="MagazynDBModel.FK__Wydania__Id_MPK__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="MagazynDBModel.FK__Wydania__Id_Osob__5535A963" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

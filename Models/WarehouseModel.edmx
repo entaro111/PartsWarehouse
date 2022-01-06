@@ -1,0 +1,582 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MagazynDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Dostawcy">
+          <Key>
+            <PropertyRef Name="Id_Dostawcy" />
+          </Key>
+          <Property Name="Id_Dostawcy" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Miejscowosc" Type="nvarchar" MaxLength="50" />
+          <Property Name="Kod" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Dzialy">
+          <Key>
+            <PropertyRef Name="Id_Dzialy" />
+          </Key>
+          <Property Name="Id_Dzialy" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JM">
+          <Key>
+            <PropertyRef Name="Id_JM" />
+          </Key>
+          <Property Name="Id_JM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kartoteki">
+          <Key>
+            <PropertyRef Name="Id_Kartoteki" />
+          </Key>
+          <Property Name="Id_Kartoteki" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Stan" Type="int" Nullable="false" />
+          <Property Name="Miejsce" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id_JM" Type="int" Nullable="false" />
+          <Property Name="Id_Dostawcy" Type="int" />
+        </EntityType>
+        <EntityType Name="MPK">
+          <Key>
+            <PropertyRef Name="Id_MPK" />
+          </Key>
+          <Property Name="Id_MPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Osoby">
+          <Key>
+            <PropertyRef Name="Id_Osoby" />
+          </Key>
+          <Property Name="Id_Osoby" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imie" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nazwisko" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id_Dzial" Type="int" />
+        </EntityType>
+        <EntityType Name="Przyjecia">
+          <Key>
+            <PropertyRef Name="Id_Przyjecia" />
+          </Key>
+          <Property Name="Id_Przyjecia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ilosc" Type="int" Nullable="false" />
+          <Property Name="Data_Przyjecia" Type="date" Nullable="false" />
+          <Property Name="Id_Kartoteki" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Wydania">
+          <Key>
+            <PropertyRef Name="Id_Wydania" />
+          </Key>
+          <Property Name="Id_Wydania" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ilosc" Type="int" Nullable="false" />
+          <Property Name="Data_Wydania" Type="date" />
+          <Property Name="Id_MPK" Type="int" />
+          <Property Name="Id_Osoby" Type="int" Nullable="false" />
+          <Property Name="Id_Kartoteki" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Zamowienia">
+          <Key>
+            <PropertyRef Name="Id_Zamowienia" />
+          </Key>
+          <Property Name="Id_Zamowienia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Data_zamowienia" Type="date" Nullable="false" />
+          <Property Name="Realizacja" Type="bit" Nullable="false" />
+          <Property Name="Id_Kartoteki" Type="int" />
+        </EntityType>
+        <Association Name="FK__Kartoteki__Id_Do__5812160E">
+          <End Role="Dostawcy" Type="Self.Dostawcy" Multiplicity="0..1" />
+          <End Role="Kartoteki" Type="Self.Kartoteki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dostawcy">
+              <PropertyRef Name="Id_Dostawcy" />
+            </Principal>
+            <Dependent Role="Kartoteki">
+              <PropertyRef Name="Id_Dostawcy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Kartoteki__Id_JM__571DF1D5">
+          <End Role="JM" Type="Self.JM" Multiplicity="1" />
+          <End Role="Kartoteki" Type="Self.Kartoteki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JM">
+              <PropertyRef Name="Id_JM" />
+            </Principal>
+            <Dependent Role="Kartoteki">
+              <PropertyRef Name="Id_JM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Osoby__Id_Dzial__534D60F1">
+          <End Role="Dzialy" Type="Self.Dzialy" Multiplicity="0..1" />
+          <End Role="Osoby" Type="Self.Osoby" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dzialy">
+              <PropertyRef Name="Id_Dzialy" />
+            </Principal>
+            <Dependent Role="Osoby">
+              <PropertyRef Name="Id_Dzial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Przyjecia__Id_Ka__01142BA1">
+          <End Role="Kartoteki" Type="Self.Kartoteki" Multiplicity="1" />
+          <End Role="Przyjecia" Type="Self.Przyjecia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kartoteki">
+              <PropertyRef Name="Id_Kartoteki" />
+            </Principal>
+            <Dependent Role="Przyjecia">
+              <PropertyRef Name="Id_Kartoteki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wydania__Id_Kart__5629CD9C">
+          <End Role="Kartoteki" Type="Self.Kartoteki" Multiplicity="1" />
+          <End Role="Wydania" Type="Self.Wydania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kartoteki">
+              <PropertyRef Name="Id_Kartoteki" />
+            </Principal>
+            <Dependent Role="Wydania">
+              <PropertyRef Name="Id_Kartoteki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wydania__Id_MPK__5441852A">
+          <End Role="MPK" Type="Self.MPK" Multiplicity="0..1" />
+          <End Role="Wydania" Type="Self.Wydania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MPK">
+              <PropertyRef Name="Id_MPK" />
+            </Principal>
+            <Dependent Role="Wydania">
+              <PropertyRef Name="Id_MPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wydania__Id_Osob__5535A963">
+          <End Role="Osoby" Type="Self.Osoby" Multiplicity="1" />
+          <End Role="Wydania" Type="Self.Wydania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Osoby">
+              <PropertyRef Name="Id_Osoby" />
+            </Principal>
+            <Dependent Role="Wydania">
+              <PropertyRef Name="Id_Osoby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zamowieni__Id_Ka__59063A47">
+          <End Role="Kartoteki" Type="Self.Kartoteki" Multiplicity="0..1" />
+          <End Role="Zamowienia" Type="Self.Zamowienia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kartoteki">
+              <PropertyRef Name="Id_Kartoteki" />
+            </Principal>
+            <Dependent Role="Zamowienia">
+              <PropertyRef Name="Id_Kartoteki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MagazynDBModelStoreContainer">
+          <EntitySet Name="Dostawcy" EntityType="Self.Dostawcy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dzialy" EntityType="Self.Dzialy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JM" EntityType="Self.JM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kartoteki" EntityType="Self.Kartoteki" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MPK" EntityType="Self.MPK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Osoby" EntityType="Self.Osoby" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Przyjecia" EntityType="Self.Przyjecia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wydania" EntityType="Self.Wydania" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zamowienia" EntityType="Self.Zamowienia" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Kartoteki__Id_Do__5812160E" Association="Self.FK__Kartoteki__Id_Do__5812160E">
+            <End Role="Dostawcy" EntitySet="Dostawcy" />
+            <End Role="Kartoteki" EntitySet="Kartoteki" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Kartoteki__Id_JM__571DF1D5" Association="Self.FK__Kartoteki__Id_JM__571DF1D5">
+            <End Role="JM" EntitySet="JM" />
+            <End Role="Kartoteki" EntitySet="Kartoteki" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Osoby__Id_Dzial__534D60F1" Association="Self.FK__Osoby__Id_Dzial__534D60F1">
+            <End Role="Dzialy" EntitySet="Dzialy" />
+            <End Role="Osoby" EntitySet="Osoby" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Przyjecia__Id_Ka__01142BA1" Association="Self.FK__Przyjecia__Id_Ka__01142BA1">
+            <End Role="Kartoteki" EntitySet="Kartoteki" />
+            <End Role="Przyjecia" EntitySet="Przyjecia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wydania__Id_Kart__5629CD9C" Association="Self.FK__Wydania__Id_Kart__5629CD9C">
+            <End Role="Kartoteki" EntitySet="Kartoteki" />
+            <End Role="Wydania" EntitySet="Wydania" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wydania__Id_MPK__5441852A" Association="Self.FK__Wydania__Id_MPK__5441852A">
+            <End Role="MPK" EntitySet="MPK" />
+            <End Role="Wydania" EntitySet="Wydania" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wydania__Id_Osob__5535A963" Association="Self.FK__Wydania__Id_Osob__5535A963">
+            <End Role="Osoby" EntitySet="Osoby" />
+            <End Role="Wydania" EntitySet="Wydania" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zamowieni__Id_Ka__59063A47" Association="Self.FK__Zamowieni__Id_Ka__59063A47">
+            <End Role="Kartoteki" EntitySet="Kartoteki" />
+            <End Role="Zamowienia" EntitySet="Zamowienia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MagazynDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Dostawcy">
+          <Key>
+            <PropertyRef Name="Id_Dostawcy" />
+          </Key>
+          <Property Name="Id_Dostawcy" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Miejscowosc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Kod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Kartoteki" Relationship="Self.FK__Kartoteki__Id_Do__5812160E" FromRole="Dostawcy" ToRole="Kartoteki" />
+        </EntityType>
+        <EntityType Name="Dzialy">
+          <Key>
+            <PropertyRef Name="Id_Dzialy" />
+          </Key>
+          <Property Name="Id_Dzialy" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Osoby" Relationship="Self.FK__Osoby__Id_Dzial__534D60F1" FromRole="Dzialy" ToRole="Osoby" />
+        </EntityType>
+        <EntityType Name="JM">
+          <Key>
+            <PropertyRef Name="Id_JM" />
+          </Key>
+          <Property Name="Id_JM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Kartoteki" Relationship="Self.FK__Kartoteki__Id_JM__571DF1D5" FromRole="JM" ToRole="Kartoteki" />
+        </EntityType>
+        <EntityType Name="Kartoteki">
+          <Key>
+            <PropertyRef Name="Id_Kartoteki" />
+          </Key>
+          <Property Name="Id_Kartoteki" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Stan" Type="Int32" Nullable="false" />
+          <Property Name="Miejsce" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Id_JM" Type="Int32" Nullable="false" />
+          <Property Name="Id_Dostawcy" Type="Int32" />
+          <NavigationProperty Name="Dostawcy" Relationship="Self.FK__Kartoteki__Id_Do__5812160E" FromRole="Kartoteki" ToRole="Dostawcy" />
+          <NavigationProperty Name="JM" Relationship="Self.FK__Kartoteki__Id_JM__571DF1D5" FromRole="Kartoteki" ToRole="JM" />
+          <NavigationProperty Name="Przyjecia" Relationship="Self.FK__Przyjecia__Id_Ka__01142BA1" FromRole="Kartoteki" ToRole="Przyjecia" />
+          <NavigationProperty Name="Wydania" Relationship="Self.FK__Wydania__Id_Kart__5629CD9C" FromRole="Kartoteki" ToRole="Wydania" />
+          <NavigationProperty Name="Zamowienia" Relationship="Self.FK__Zamowieni__Id_Ka__59063A47" FromRole="Kartoteki" ToRole="Zamowienia" />
+        </EntityType>
+        <EntityType Name="MPK">
+          <Key>
+            <PropertyRef Name="Id_MPK" />
+          </Key>
+          <Property Name="Id_MPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Wydania" Relationship="Self.FK__Wydania__Id_MPK__5441852A" FromRole="MPK" ToRole="Wydania" />
+        </EntityType>
+        <EntityType Name="Osoby">
+          <Key>
+            <PropertyRef Name="Id_Osoby" />
+          </Key>
+          <Property Name="Id_Osoby" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id_Dzial" Type="Int32" />
+          <NavigationProperty Name="Dzialy" Relationship="Self.FK__Osoby__Id_Dzial__534D60F1" FromRole="Osoby" ToRole="Dzialy" />
+          <NavigationProperty Name="Wydania" Relationship="Self.FK__Wydania__Id_Osob__5535A963" FromRole="Osoby" ToRole="Wydania" />
+        </EntityType>
+        <EntityType Name="Przyjecia">
+          <Key>
+            <PropertyRef Name="Id_Przyjecia" />
+          </Key>
+          <Property Name="Id_Przyjecia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ilosc" Type="Int32" Nullable="false" />
+          <Property Name="Data_Przyjecia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Id_Kartoteki" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Kartoteki" Relationship="Self.FK__Przyjecia__Id_Ka__01142BA1" FromRole="Przyjecia" ToRole="Kartoteki" />
+        </EntityType>
+        <EntityType Name="Wydania">
+          <Key>
+            <PropertyRef Name="Id_Wydania" />
+          </Key>
+          <Property Name="Id_Wydania" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ilosc" Type="Int32" Nullable="false" />
+          <Property Name="Data_Wydania" Type="DateTime" Precision="0" />
+          <Property Name="Id_MPK" Type="Int32" />
+          <Property Name="Id_Osoby" Type="Int32" Nullable="false" />
+          <Property Name="Id_Kartoteki" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Kartoteki" Relationship="Self.FK__Wydania__Id_Kart__5629CD9C" FromRole="Wydania" ToRole="Kartoteki" />
+          <NavigationProperty Name="MPK" Relationship="Self.FK__Wydania__Id_MPK__5441852A" FromRole="Wydania" ToRole="MPK" />
+          <NavigationProperty Name="Osoby" Relationship="Self.FK__Wydania__Id_Osob__5535A963" FromRole="Wydania" ToRole="Osoby" />
+        </EntityType>
+        <EntityType Name="Zamowienia">
+          <Key>
+            <PropertyRef Name="Id_Zamowienia" />
+          </Key>
+          <Property Name="Id_Zamowienia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Data_zamowienia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Realizacja" Type="Boolean" Nullable="false" />
+          <Property Name="Id_Kartoteki" Type="Int32" />
+          <NavigationProperty Name="Kartoteki" Relationship="Self.FK__Zamowieni__Id_Ka__59063A47" FromRole="Zamowienia" ToRole="Kartoteki" />
+        </EntityType>
+        <Association Name="FK__Kartoteki__Id_Do__5812160E">
+          <End Role="Dostawcy" Type="Self.Dostawcy" Multiplicity="0..1" />
+          <End Role="Kartoteki" Type="Self.Kartoteki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dostawcy">
+              <PropertyRef Name="Id_Dostawcy" />
+            </Principal>
+            <Dependent Role="Kartoteki">
+              <PropertyRef Name="Id_Dostawcy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Osoby__Id_Dzial__534D60F1">
+          <End Role="Dzialy" Type="Self.Dzialy" Multiplicity="0..1" />
+          <End Role="Osoby" Type="Self.Osoby" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dzialy">
+              <PropertyRef Name="Id_Dzialy" />
+            </Principal>
+            <Dependent Role="Osoby">
+              <PropertyRef Name="Id_Dzial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Kartoteki__Id_JM__571DF1D5">
+          <End Role="JM" Type="Self.JM" Multiplicity="1" />
+          <End Role="Kartoteki" Type="Self.Kartoteki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JM">
+              <PropertyRef Name="Id_JM" />
+            </Principal>
+            <Dependent Role="Kartoteki">
+              <PropertyRef Name="Id_JM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Przyjecia__Id_Ka__01142BA1">
+          <End Role="Kartoteki" Type="Self.Kartoteki" Multiplicity="1" />
+          <End Role="Przyjecia" Type="Self.Przyjecia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kartoteki">
+              <PropertyRef Name="Id_Kartoteki" />
+            </Principal>
+            <Dependent Role="Przyjecia">
+              <PropertyRef Name="Id_Kartoteki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wydania__Id_Kart__5629CD9C">
+          <End Role="Kartoteki" Type="Self.Kartoteki" Multiplicity="1" />
+          <End Role="Wydania" Type="Self.Wydania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kartoteki">
+              <PropertyRef Name="Id_Kartoteki" />
+            </Principal>
+            <Dependent Role="Wydania">
+              <PropertyRef Name="Id_Kartoteki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zamowieni__Id_Ka__59063A47">
+          <End Role="Kartoteki" Type="Self.Kartoteki" Multiplicity="0..1" />
+          <End Role="Zamowienia" Type="Self.Zamowienia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kartoteki">
+              <PropertyRef Name="Id_Kartoteki" />
+            </Principal>
+            <Dependent Role="Zamowienia">
+              <PropertyRef Name="Id_Kartoteki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wydania__Id_MPK__5441852A">
+          <End Role="MPK" Type="Self.MPK" Multiplicity="0..1" />
+          <End Role="Wydania" Type="Self.Wydania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MPK">
+              <PropertyRef Name="Id_MPK" />
+            </Principal>
+            <Dependent Role="Wydania">
+              <PropertyRef Name="Id_MPK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wydania__Id_Osob__5535A963">
+          <End Role="Osoby" Type="Self.Osoby" Multiplicity="1" />
+          <End Role="Wydania" Type="Self.Wydania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Osoby">
+              <PropertyRef Name="Id_Osoby" />
+            </Principal>
+            <Dependent Role="Wydania">
+              <PropertyRef Name="Id_Osoby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MagazynDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Dostawcy" EntityType="Self.Dostawcy" />
+          <EntitySet Name="Dzialy" EntityType="Self.Dzialy" />
+          <EntitySet Name="JM" EntityType="Self.JM" />
+          <EntitySet Name="Kartoteki" EntityType="Self.Kartoteki" />
+          <EntitySet Name="MPK" EntityType="Self.MPK" />
+          <EntitySet Name="Osoby" EntityType="Self.Osoby" />
+          <EntitySet Name="Przyjecia" EntityType="Self.Przyjecia" />
+          <EntitySet Name="Wydania" EntityType="Self.Wydania" />
+          <EntitySet Name="Zamowienia" EntityType="Self.Zamowienia" />
+          <AssociationSet Name="FK__Kartoteki__Id_Do__5812160E" Association="Self.FK__Kartoteki__Id_Do__5812160E">
+            <End Role="Dostawcy" EntitySet="Dostawcy" />
+            <End Role="Kartoteki" EntitySet="Kartoteki" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Osoby__Id_Dzial__534D60F1" Association="Self.FK__Osoby__Id_Dzial__534D60F1">
+            <End Role="Dzialy" EntitySet="Dzialy" />
+            <End Role="Osoby" EntitySet="Osoby" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Kartoteki__Id_JM__571DF1D5" Association="Self.FK__Kartoteki__Id_JM__571DF1D5">
+            <End Role="JM" EntitySet="JM" />
+            <End Role="Kartoteki" EntitySet="Kartoteki" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Przyjecia__Id_Ka__01142BA1" Association="Self.FK__Przyjecia__Id_Ka__01142BA1">
+            <End Role="Kartoteki" EntitySet="Kartoteki" />
+            <End Role="Przyjecia" EntitySet="Przyjecia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wydania__Id_Kart__5629CD9C" Association="Self.FK__Wydania__Id_Kart__5629CD9C">
+            <End Role="Kartoteki" EntitySet="Kartoteki" />
+            <End Role="Wydania" EntitySet="Wydania" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zamowieni__Id_Ka__59063A47" Association="Self.FK__Zamowieni__Id_Ka__59063A47">
+            <End Role="Kartoteki" EntitySet="Kartoteki" />
+            <End Role="Zamowienia" EntitySet="Zamowienia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wydania__Id_MPK__5441852A" Association="Self.FK__Wydania__Id_MPK__5441852A">
+            <End Role="MPK" EntitySet="MPK" />
+            <End Role="Wydania" EntitySet="Wydania" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wydania__Id_Osob__5535A963" Association="Self.FK__Wydania__Id_Osob__5535A963">
+            <End Role="Osoby" EntitySet="Osoby" />
+            <End Role="Wydania" EntitySet="Wydania" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MagazynDBModelStoreContainer" CdmEntityContainer="MagazynDBEntities">
+          <EntitySetMapping Name="Dostawcy">
+            <EntityTypeMapping TypeName="MagazynDBModel.Dostawcy">
+              <MappingFragment StoreEntitySet="Dostawcy">
+                <ScalarProperty Name="Id_Dostawcy" ColumnName="Id_Dostawcy" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="Miejscowosc" ColumnName="Miejscowosc" />
+                <ScalarProperty Name="Kod" ColumnName="Kod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dzialy">
+            <EntityTypeMapping TypeName="MagazynDBModel.Dzialy">
+              <MappingFragment StoreEntitySet="Dzialy">
+                <ScalarProperty Name="Id_Dzialy" ColumnName="Id_Dzialy" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JM">
+            <EntityTypeMapping TypeName="MagazynDBModel.JM">
+              <MappingFragment StoreEntitySet="JM">
+                <ScalarProperty Name="Id_JM" ColumnName="Id_JM" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kartoteki">
+            <EntityTypeMapping TypeName="MagazynDBModel.Kartoteki">
+              <MappingFragment StoreEntitySet="Kartoteki">
+                <ScalarProperty Name="Id_Kartoteki" ColumnName="Id_Kartoteki" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="Stan" ColumnName="Stan" />
+                <ScalarProperty Name="Miejsce" ColumnName="Miejsce" />
+                <ScalarProperty Name="Id_JM" ColumnName="Id_JM" />
+                <ScalarProperty Name="Id_Dostawcy" ColumnName="Id_Dostawcy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MPK">
+            <EntityTypeMapping TypeName="MagazynDBModel.MPK">
+              <MappingFragment StoreEntitySet="MPK">
+                <ScalarProperty Name="Id_MPK" ColumnName="Id_MPK" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Osoby">
+            <EntityTypeMapping TypeName="MagazynDBModel.Osoby">
+              <MappingFragment StoreEntitySet="Osoby">
+                <ScalarProperty Name="Id_Osoby" ColumnName="Id_Osoby" />
+                <ScalarProperty Name="Imie" ColumnName="Imie" />
+                <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+                <ScalarProperty Name="Id_Dzial" ColumnName="Id_Dzial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Przyjecia">
+            <EntityTypeMapping TypeName="MagazynDBModel.Przyjecia">
+              <MappingFragment StoreEntitySet="Przyjecia">
+                <ScalarProperty Name="Id_Przyjecia" ColumnName="Id_Przyjecia" />
+                <ScalarProperty Name="Ilosc" ColumnName="Ilosc" />
+                <ScalarProperty Name="Data_Przyjecia" ColumnName="Data_Przyjecia" />
+                <ScalarProperty Name="Id_Kartoteki" ColumnName="Id_Kartoteki" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wydania">
+            <EntityTypeMapping TypeName="MagazynDBModel.Wydania">
+              <MappingFragment StoreEntitySet="Wydania">
+                <ScalarProperty Name="Id_Wydania" ColumnName="Id_Wydania" />
+                <ScalarProperty Name="Ilosc" ColumnName="Ilosc" />
+                <ScalarProperty Name="Data_Wydania" ColumnName="Data_Wydania" />
+                <ScalarProperty Name="Id_MPK" ColumnName="Id_MPK" />
+                <ScalarProperty Name="Id_Osoby" ColumnName="Id_Osoby" />
+                <ScalarProperty Name="Id_Kartoteki" ColumnName="Id_Kartoteki" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zamowienia">
+            <EntityTypeMapping TypeName="MagazynDBModel.Zamowienia">
+              <MappingFragment StoreEntitySet="Zamowienia">
+                <ScalarProperty Name="Id_Zamowienia" ColumnName="Id_Zamowienia" />
+                <ScalarProperty Name="Data_zamowienia" ColumnName="Data_zamowienia" />
+                <ScalarProperty Name="Realizacja" ColumnName="Realizacja" />
+                <ScalarProperty Name="Id_Kartoteki" ColumnName="Id_Kartoteki" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

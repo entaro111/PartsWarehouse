@@ -1,0 +1,58 @@
+﻿@model PartsWarehouse.Models.Kartoteki
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Kartoteki</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Miejsce)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Miejsce)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dostawcy.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dostawcy.Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JM.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JM.Nazwa)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Kartoteki }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

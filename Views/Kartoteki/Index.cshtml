@@ -1,0 +1,57 @@
+﻿@model IEnumerable<PartsWarehouse.Models.Kartoteki>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nazwa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Miejsce)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dostawcy.Nazwa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JM.Nazwa)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nazwa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Miejsce)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dostawcy.Nazwa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JM.Nazwa)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id_Kartoteki }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id_Kartoteki }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id_Kartoteki })
+        </td>
+    </tr>
+}
+
+</table>

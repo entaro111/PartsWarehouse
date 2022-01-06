@@ -11,11 +11,14 @@ namespace PartsWarehouse.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Zamowienia
     {
         public int Id_Zamowienia { get; set; }
+        [Required(ErrorMessage = "Podaj datê")]
         public System.DateTime Data_zamowienia { get; set; }
+        [Required(ErrorMessage = "Zrealizowane?")]
         public bool Realizacja { get; set; }
         public Nullable<int> Id_Kartoteki { get; set; }
     

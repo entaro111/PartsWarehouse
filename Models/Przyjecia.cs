@@ -11,10 +11,12 @@ namespace PartsWarehouse.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Przyjecia
     {
         public int Id_Przyjecia { get; set; }
+        [Required(ErrorMessage = "Podaj iloœæ")]
         public int Ilosc { get; set; }
         public System.DateTime Data_Przyjecia { get; set; }
         public int Id_Kartoteki { get; set; }

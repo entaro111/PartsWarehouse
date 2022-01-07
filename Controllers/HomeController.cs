@@ -10,6 +10,7 @@ namespace PartsWarehouse.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Message = "Witaj w magazynie";
             return View();
         }
 

@@ -35,6 +35,25 @@
         </dd>
 
     </dl>
+    <div class="table">
+        <table>
+            <tr>
+                <th>Część</th>
+                <th>Data wydania</th>
+            </tr>
+            @foreach( var item in Model.Wydania)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Kartoteki.Nazwa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data_Wydania)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Osoby }) |

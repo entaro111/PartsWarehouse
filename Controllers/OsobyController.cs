@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PagedList;
+using PartsWarehouse.Models;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using PartsWarehouse.Models;
 
 namespace PartsWarehouse.Controllers
 {
@@ -15,10 +14,47 @@ namespace PartsWarehouse.Controllers
         private MagazynDBEntities db = new MagazynDBEntities();
 
         // GET: Osoby
-        public ActionResult Index()
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
+            ViewBag.DzialSortParm = sortOrder == "Dzial" ? "Dzial_desc" : "Dzial";
+
+            if(searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             var osoby = db.Osoby.Include(o => o.Dzialy);
-            return View(osoby.ToList());
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                osoby = osoby.Where(o => o.Nazwisko.ToUpper().Contains(searchString.ToUpper()) || o.Imie.ToUpper().Contains(searchString.ToUpper()));
+            }
+            switch (sortOrder)
+            {
+                case "Name_desc":
+                    osoby = osoby.OrderByDescending(o => o.Nazwisko);
+                    break;
+                case "Dzial":
+                    osoby = osoby.OrderBy(o => o.Dzialy.Nazwa);
+                    break;
+                case "Dzial_desc":
+                    osoby = osoby.OrderByDescending(o => o.Dzialy.Nazwa);
+                    break;
+                default:
+                    osoby = osoby.OrderBy(o => o.Nazwisko);
+                    break;
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(osoby.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Osoby/Details/5

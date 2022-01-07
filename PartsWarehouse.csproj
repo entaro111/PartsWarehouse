@@ -149,12 +149,14 @@
     <Compile Include="Models\Kartoteki.cs">
       <DependentUpon>WarehouseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\MPK.cs">
       <DependentUpon>WarehouseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Osoby.cs">
       <DependentUpon>WarehouseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PartialClasses.cs" />
     <Compile Include="Models\Przyjecia.cs">
       <DependentUpon>WarehouseModel.tt</DependentUpon>
     </Compile>

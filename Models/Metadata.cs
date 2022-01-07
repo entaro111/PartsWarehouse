@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -8,6 +9,7 @@ namespace PartsWarehouse.Models
 {
     public class DostawcyMetadata
     {
+
         [Required(ErrorMessage = "Podaj nazwę dostawcy")]
         [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
         [Display(Name ="Dostawca")]
@@ -104,6 +106,7 @@ namespace PartsWarehouse.Models
         [Display(Name = "Data zamówienia")]
         public System.DateTime Data_zamowienia;
         public bool Realizacja;
+        [Display(Name = "Ilość")]
         [Required(ErrorMessage = "Podaj ilość")]
         public Nullable<int> Ilosc;
     }

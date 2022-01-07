@@ -244,11 +244,6 @@
     <Content Include="Views\Osoby\Details.cshtml" />
     <Content Include="Views\Osoby\Edit.cshtml" />
     <Content Include="Views\Osoby\Index.cshtml" />
-    <Content Include="Views\Zamowienia\Create.cshtml" />
-    <Content Include="Views\Zamowienia\Delete.cshtml" />
-    <Content Include="Views\Zamowienia\Details.cshtml" />
-    <Content Include="Views\Zamowienia\Edit.cshtml" />
-    <Content Include="Views\Zamowienia\Index.cshtml" />
     <Content Include="Views\Wydania\Create.cshtml" />
     <Content Include="Views\Wydania\Delete.cshtml" />
     <Content Include="Views\Wydania\Details.cshtml" />
@@ -259,6 +254,11 @@
     <Content Include="Views\Kartoteki\Details.cshtml" />
     <Content Include="Views\Kartoteki\Edit.cshtml" />
     <Content Include="Views\Kartoteki\Index.cshtml" />
+    <Content Include="Views\Zamowienia\Create.cshtml" />
+    <Content Include="Views\Zamowienia\Delete.cshtml" />
+    <Content Include="Views\Zamowienia\Details.cshtml" />
+    <Content Include="Views\Zamowienia\Edit.cshtml" />
+    <Content Include="Views\Zamowienia\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -84,6 +84,7 @@
           <Property Name="Data_zamowienia" Type="date" Nullable="false" />
           <Property Name="Realizacja" Type="bit" Nullable="false" />
           <Property Name="Id_Kartoteki" Type="int" />
+          <Property Name="Ilosc" Type="int" />
         </EntityType>
         <Association Name="FK__Kartoteki__Id_Do__5812160E">
           <End Role="Dostawcy" Type="Self.Dostawcy" Multiplicity="0..1" />
@@ -323,6 +324,7 @@
           <Property Name="Realizacja" Type="Boolean" Nullable="false" />
           <Property Name="Id_Kartoteki" Type="Int32" />
           <NavigationProperty Name="Kartoteki" Relationship="Self.FK__Zamowieni__Id_Ka__59063A47" FromRole="Zamowienia" ToRole="Kartoteki" />
+          <Property Name="Ilosc" Type="Int32" />
         </EntityType>
         <Association Name="FK__Kartoteki__Id_Do__5812160E">
           <End Role="Dostawcy" Type="Self.Dostawcy" Multiplicity="0..1" />
@@ -551,6 +553,7 @@
           <EntitySetMapping Name="Zamowienia">
             <EntityTypeMapping TypeName="MagazynDBModel.Zamowienia">
               <MappingFragment StoreEntitySet="Zamowienia">
+                <ScalarProperty Name="Ilosc" ColumnName="Ilosc" />
                 <ScalarProperty Name="Id_Zamowienia" ColumnName="Id_Zamowienia" />
                 <ScalarProperty Name="Data_zamowienia" ColumnName="Data_zamowienia" />
                 <ScalarProperty Name="Realizacja" ColumnName="Realizacja" />

@@ -11,8 +11,7 @@ namespace PartsWarehouse.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Dzialy
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,8 +21,6 @@ namespace PartsWarehouse.Models
         }
     
         public int Id_Dzialy { get; set; }
-        [Required(ErrorMessage = "Podaj nazwê dzia³u")]
-        [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
         public string Nazwa { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

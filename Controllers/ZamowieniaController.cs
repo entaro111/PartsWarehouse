@@ -48,7 +48,7 @@ namespace PartsWarehouse.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_Zamowienia,Data_zamowienia,Realizacja,Id_Kartoteki")] Zamowienia zamowienia)
+        public ActionResult Create([Bind(Include = "Id_Zamowienia,Data_zamowienia,Realizacja,Id_Kartoteki,Ilosc")] Zamowienia zamowienia)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace PartsWarehouse.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_Zamowienia,Data_zamowienia,Realizacja,Id_Kartoteki")] Zamowienia zamowienia)
+        public ActionResult Edit([Bind(Include = "Id_Zamowienia,Data_zamowienia,Realizacja,Id_Kartoteki,Ilosc")] Zamowienia zamowienia)
         {
             if (ModelState.IsValid)
             {

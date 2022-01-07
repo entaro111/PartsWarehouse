@@ -11,20 +11,14 @@ namespace PartsWarehouse.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Wydania
     {
         public int Id_Wydania { get; set; }
-        [Required(ErrorMessage = "Podaj iloœæ")]
         public int Ilosc { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> Data_Wydania { get; set; }
         public Nullable<int> Id_MPK { get; set; }
-        [Required(ErrorMessage = "Wybierz osobê")]
         public int Id_Osoby { get; set; }
-        [Required(ErrorMessage = "Wybierz czêœæ")]
         public int Id_Kartoteki { get; set; }
     
         public virtual Kartoteki Kartoteki { get; set; }

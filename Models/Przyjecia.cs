@@ -11,15 +11,11 @@ namespace PartsWarehouse.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Przyjecia
     {
         public int Id_Przyjecia { get; set; }
-        [Required(ErrorMessage = "Podaj iloœæ")]
         public int Ilosc { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime Data_Przyjecia { get; set; }
         public int Id_Kartoteki { get; set; }
     

@@ -10,8 +10,10 @@ namespace PartsWarehouse.Models
     {
         [Required(ErrorMessage = "Podaj nazwę dostawcy")]
         [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
+        [Display(Name ="Dostawca")]
         public string Nazwa;
         [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
+        [Display(Name = "Miejscowość")]
         public string Miejscowosc;
         [StringLength(6, ErrorMessage = "Maksymalnie 6 znaków")]
         public string Kod;
@@ -38,6 +40,7 @@ namespace PartsWarehouse.Models
     {
         [Required(ErrorMessage = "Podaj nazwę części")]
         [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
+        [Display(Name ="Nazwa części")]
         public string Nazwa;
         [Required(ErrorMessage = "Podaj stan")]
         public int Stan;
@@ -61,6 +64,7 @@ namespace PartsWarehouse.Models
     {
         [Required(ErrorMessage = "Podaj imię")]
         [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
+        [Display(Name = "Imię")]
         public string Imie;
         [Required(ErrorMessage = "Podaj nazwisko")]
         [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
@@ -70,6 +74,7 @@ namespace PartsWarehouse.Models
     public class PrzyjeciaMetadata
     {
         [Required(ErrorMessage = "Podaj ilość")]
+        [Display(Name = "Ilość")]
         public int Ilosc;
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
@@ -79,9 +84,11 @@ namespace PartsWarehouse.Models
     public class WydaniaMetadata
     {
         [Required(ErrorMessage = "Podaj ilość")]
+        [Display(Name = "Ilość")]
         public int Ilosc;
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name ="Data wydania")]
         public Nullable<System.DateTime> Data_Wydania;
         [Required(ErrorMessage = "Wybierz osobę")]
         public int Id_Osoby;
@@ -94,6 +101,7 @@ namespace PartsWarehouse.Models
         [Required(ErrorMessage = "Podaj datę")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Data zamówienia")]
         public System.DateTime Data_zamowienia;
         public bool Realizacja;
         [Required(ErrorMessage = "Podaj ilość")]

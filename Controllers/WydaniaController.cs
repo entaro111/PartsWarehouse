@@ -52,13 +52,14 @@ namespace PartsWarehouse.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id_Wydania,Ilosc,Data_Wydania,Id_MPK,Id_Osoby,Id_Kartoteki")] Wydania wydania)
         {
+
             if (ModelState.IsValid)
             {
                 db.Wydania.Add(wydania);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            
             ViewBag.Id_Kartoteki = new SelectList(db.Kartoteki, "Id_Kartoteki", "Nazwa", wydania.Id_Kartoteki);
             ViewBag.Id_MPK = new SelectList(db.MPK, "Id_MPK", "Nazwa", wydania.Id_MPK);
             ViewBag.Id_Osoby = new SelectList(db.Osoby, "Id_Osoby", "Imie", wydania.Id_Osoby);
@@ -90,7 +91,8 @@ namespace PartsWarehouse.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id_Wydania,Ilosc,Data_Wydania,Id_MPK,Id_Osoby,Id_Kartoteki")] Wydania wydania)
         {
-            if (ModelState.IsValid)
+
+                if (ModelState.IsValid)
             {
                 db.Entry(wydania).State = EntityState.Modified;
                 db.SaveChanges();
@@ -135,6 +137,14 @@ namespace PartsWarehouse.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public JsonResult stanKartoteki (int? id, int ilosc)
+        {
+            var wydanie = db.Wydania.Find(id);
+            var kartoteka = db.Kartoteki.FirstOrDefault(x => x.Id_Kartoteki == wydanie.Id_Kartoteki);
+            if (ilosc - kartoteka.Stan > 0) return Json(true);
+            else return Json(false);
         }
     }
 }

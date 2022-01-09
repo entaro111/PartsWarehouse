@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace PartsWarehouse.Models
 {
@@ -44,6 +45,8 @@ namespace PartsWarehouse.Models
     [MetadataType(typeof(WydaniaMetadata))]
     public partial class Wydania
     {
+   //     [Remote("stanKartoteki", "Wydania", AdditionalFields = "Id_Kartoteki", ErrorMessage = "Za dużo chcesz", HttpMethod = "POST")]
+        public int Ilosc { get; set; }
     }
 
     [MetadataType(typeof(ZamowieniaMetadata))]

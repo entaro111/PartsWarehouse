@@ -51,6 +51,7 @@ namespace PartsWarehouse.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id_Kartoteki,Nazwa,Stan,Miejsce,Id_JM,Id_Dostawcy,Kod")] Kartoteki kartoteki)
         {
+
             if (ModelState.IsValid)
             {
                 db.Kartoteki.Add(kartoteki);
@@ -61,6 +62,7 @@ namespace PartsWarehouse.Controllers
             ViewBag.Id_Dostawcy = new SelectList(db.Dostawcy, "Id_Dostawcy", "Nazwa", kartoteki.Id_Dostawcy);
             ViewBag.Id_JM = new SelectList(db.JM, "Id_JM", "Nazwa", kartoteki.Id_JM);
             return View(kartoteki);
+
         }
 
         // GET: Kartoteki/Edit/5
@@ -131,6 +133,16 @@ namespace PartsWarehouse.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public JsonResult nameExist([Bind(Prefix = "Nazwa")] string Name)
+        {
+            return Json(!db.Kartoteki.Any(x => x.Nazwa.ToLower() == Name.ToLower()), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult codeExist([Bind(Prefix = "Kod")] string Code)
+        {
+            return Json(!db.Kartoteki.Any(x => x.Kod.ToLower() == Code.ToLower()), JsonRequestBehavior.AllowGet);
         }
     }
 }

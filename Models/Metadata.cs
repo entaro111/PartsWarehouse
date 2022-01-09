@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
+using System.Web.Mvc;
 
 namespace PartsWarehouse.Models
 {
@@ -43,7 +40,8 @@ namespace PartsWarehouse.Models
         [Required(ErrorMessage = "Podaj nazwę części")]
         [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
         [Display(Name ="Nazwa części")]
-        public string Nazwa;
+        [Remote("nameExist", "Kartoteki", HttpMethod = "POST", ErrorMessage = "Nazwa już istnieje")]
+        public string Nazwa { get; set; }
         [Required(ErrorMessage = "Podaj stan")]
         public int Stan;
         [Required(ErrorMessage = "Podaj miejsce składowania")]
@@ -51,7 +49,8 @@ namespace PartsWarehouse.Models
         public string Miejsce;
         [Required(ErrorMessage = "Podaj kod kartoteki")]
         [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
-        public string Kod;
+        [Remote("codeExist", "Kartoteki", HttpMethod = "POST", ErrorMessage = "Kod już istnieje")]
+        public string Kod { get; set; }
     }
 
     public class MPKMetadata
@@ -87,6 +86,7 @@ namespace PartsWarehouse.Models
     {
         [Required(ErrorMessage = "Podaj ilość")]
         [Display(Name = "Ilość")]
+
         public int Ilosc;
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]

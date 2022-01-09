@@ -15,7 +15,7 @@ namespace PartsWarehouse.Models
     public partial class Wydania
     {
         public int Id_Wydania { get; set; }
-        public int Ilosc { get; set; }
+       // public int Ilosc { get; set; }
         public Nullable<System.DateTime> Data_Wydania { get; set; }
         public Nullable<int> Id_MPK { get; set; }
         public int Id_Osoby { get; set; }

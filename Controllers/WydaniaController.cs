@@ -56,6 +56,7 @@ namespace PartsWarehouse.Controllers
             if (ModelState.IsValid)
             {
                 db.Wydania.Add(wydania);
+                TakeOffQuantity(wydania.Id_Kartoteki, wydania.Ilosc);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -145,5 +146,13 @@ namespace PartsWarehouse.Controllers
             if (kartoteka.Stan - Ilosc > 0) return Json(true, JsonRequestBehavior.AllowGet);
             else return Json(false,JsonRequestBehavior.DenyGet);
         }
+
+        public void TakeOffQuantity(int Id_Kartoteki, int Ilosc)
+        {
+            var kartoteka = db.Kartoteki.FirstOrDefault(x => x.Id_Kartoteki == Id_Kartoteki);
+            kartoteka.Stan -= Ilosc;
+        }
+
+        
     }
 }

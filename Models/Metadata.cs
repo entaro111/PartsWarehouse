@@ -40,7 +40,7 @@ namespace PartsWarehouse.Models
         [Required(ErrorMessage = "Podaj nazwę części")]
         [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
         [Display(Name ="Nazwa części")]
-        [Remote("nameExist", "Kartoteki", HttpMethod = "POST", ErrorMessage = "Nazwa już istnieje")]
+        [Remote("nameExist", "Kartoteki", AdditionalFields ="Id_Kartoteki", HttpMethod = "POST", ErrorMessage = "Nazwa już istnieje")]
         public string Nazwa { get; set; }
         [Required(ErrorMessage = "Podaj stan")]
         public int Stan;
@@ -49,7 +49,7 @@ namespace PartsWarehouse.Models
         public string Miejsce;
         [Required(ErrorMessage = "Podaj kod kartoteki")]
         [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
-        [Remote("codeExist", "Kartoteki", HttpMethod = "POST", ErrorMessage = "Kod już istnieje")]
+        [Remote("codeExist", "Kartoteki",AdditionalFields = "Id_Kartoteki", HttpMethod = "POST", ErrorMessage = "Kod już istnieje")]
         public string Kod { get; set; }
     }
 

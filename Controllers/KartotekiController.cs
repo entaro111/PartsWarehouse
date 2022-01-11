@@ -134,15 +134,29 @@ namespace PartsWarehouse.Controllers
             }
             base.Dispose(disposing);
         }
-
-        public JsonResult nameExist([Bind(Prefix = "Nazwa")] string Name)
+        [HttpPost]
+        public JsonResult nameExist(string Nazwa, int? Id_Kartoteki)
         {
-            return Json(!db.Kartoteki.Any(x => x.Nazwa.ToLower() == Name.ToLower()), JsonRequestBehavior.AllowGet);
+
+            return Json(IsNameUnique(Nazwa, Id_Kartoteki));
+
+        }
+        [HttpPost]
+        public JsonResult codeExist(string Kod, int? Id_Kartoteki)
+        {
+            return Json(IsCodeUnique(Kod, Id_Kartoteki));
         }
 
-        public JsonResult codeExist([Bind(Prefix = "Kod")] string Code)
+        private bool IsNameUnique(string Name, int? id)
         {
-            return Json(!db.Kartoteki.Any(x => x.Kod.ToLower() == Code.ToLower()), JsonRequestBehavior.AllowGet);
+            if (id == 0) return !db.Kartoteki.Any(x => x.Nazwa == Name);
+            else return !db.Kartoteki.Any(x => x.Nazwa == Name && x.Id_Kartoteki != id);
+        }
+
+        private bool IsCodeUnique ( string Code, int? id)
+        {
+            if (id == 0) return !db.Kartoteki.Any(x => x.Kod == Code);
+            else return !db.Kartoteki.Any(x => x.Kod == Code && x.Id_Kartoteki != id);
         }
     }
 }

@@ -126,6 +126,7 @@ namespace PartsWarehouse.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Wydania wydania = db.Wydania.Find(id);
+            ReturnQuantity(wydania.Id_Kartoteki, wydania.Ilosc);
             db.Wydania.Remove(wydania);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -147,10 +148,16 @@ namespace PartsWarehouse.Controllers
             else return Json(false,JsonRequestBehavior.DenyGet);
         }
 
-        public void TakeOffQuantity(int Id_Kartoteki, int Ilosc)
+        private void TakeOffQuantity(int Id_Kartoteki, int Ilosc)
         {
             var kartoteka = db.Kartoteki.FirstOrDefault(x => x.Id_Kartoteki == Id_Kartoteki);
             kartoteka.Stan -= Ilosc;
+        }
+
+        private void ReturnQuantity(int Id_Kartoteki, int Ilosc)
+        {
+            var kartoteka = db.Kartoteki.FirstOrDefault(x => x.Id_Kartoteki == Id_Kartoteki);
+            kartoteka.Stan += Ilosc;
         }
 
         

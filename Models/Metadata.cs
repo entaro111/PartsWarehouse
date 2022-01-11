@@ -86,8 +86,8 @@ namespace PartsWarehouse.Models
     {
         [Required(ErrorMessage = "Podaj ilość")]
         [Display(Name = "Ilość")]
-
-        public int Ilosc;
+        [Remote("stanKartoteki", "Wydania", AdditionalFields ="Id_Kartoteki", ErrorMessage = "Za dużo chcesz", HttpMethod = "POST")]
+        public int Ilosc { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name ="Data wydania")]

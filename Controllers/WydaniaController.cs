@@ -139,12 +139,11 @@ namespace PartsWarehouse.Controllers
             base.Dispose(disposing);
         }
 
-        public JsonResult stanKartoteki (int? id, int ilosc)
+        public JsonResult stanKartoteki(int Ilosc, int? Id_Kartoteki)
         {
-            var wydanie = db.Wydania.Find(id);
-            var kartoteka = db.Kartoteki.FirstOrDefault(x => x.Id_Kartoteki == wydanie.Id_Kartoteki);
-            if (ilosc - kartoteka.Stan > 0) return Json(true);
-            else return Json(false);
+            var kartoteka = db.Kartoteki.FirstOrDefault(x => x.Id_Kartoteki == Id_Kartoteki);
+            if (kartoteka.Stan - Ilosc > 0) return Json(true, JsonRequestBehavior.AllowGet);
+            else return Json(false,JsonRequestBehavior.DenyGet);
         }
     }
 }

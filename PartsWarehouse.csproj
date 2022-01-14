@@ -19,8 +19,8 @@
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44312</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
@@ -137,6 +137,7 @@
     <Compile Include="Controllers\DostawcyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KartotekiController.cs" />
+    <Compile Include="Controllers\MPKController.cs" />
     <Compile Include="Controllers\OsobyController.cs" />
     <Compile Include="Controllers\WydaniaController.cs" />
     <Compile Include="Controllers\ZamowieniaController.cs" />
@@ -268,6 +269,11 @@
     <Content Include="Views\Zamowienia\Details.cshtml" />
     <Content Include="Views\Zamowienia\Edit.cshtml" />
     <Content Include="Views\Zamowienia\Index.cshtml" />
+    <Content Include="Views\MPK\Create.cshtml" />
+    <Content Include="Views\MPK\Delete.cshtml" />
+    <Content Include="Views\MPK\Details.cshtml" />
+    <Content Include="Views\MPK\Edit.cshtml" />
+    <Content Include="Views\MPK\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

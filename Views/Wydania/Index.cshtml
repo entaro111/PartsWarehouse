@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<PartsWarehouse.Models.Wydania>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Wydania";
 }
 
-<h2>Index</h2>
+<h2>Wydania</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Stwórz nowe wydanie", "Create")
 </p>
 <table class="table">
     <tr>
@@ -47,9 +47,9 @@
             @Html.DisplayFor(modelItem => item.Osoby.Imie)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id_Wydania }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id_Wydania }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id_Wydania })
+            @Html.ActionLink("Edycja", "Edit", new { id=item.Id_Wydania }) |
+            @Html.ActionLink("Szczegóły", "Details", new { id=item.Id_Wydania }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.Id_Wydania })
         </td>
     </tr>
 }

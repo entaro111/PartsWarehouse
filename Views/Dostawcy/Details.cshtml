@@ -1,10 +1,10 @@
 ﻿@model PartsWarehouse.Models.Dostawcy
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Dostawca - szczegóły";
 }
 
-<h2>Details</h2>
+<h2>Szczegóły</h2>
 
 <div>
     <h4>Dostawcy</h4>
@@ -37,6 +37,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Dostawcy }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edycja", "Edit", new { id = Model.Id_Dostawcy }) |
+    @Html.ActionLink("Powrót", "Index")
 </p>

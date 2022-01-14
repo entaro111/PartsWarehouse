@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<PartsWarehouse.Models.Zamowienia>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Zamówienia";
 }
 
-<h2>Index</h2>
+<h2>Zamówienia</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Stwórz nowe zamówienie", "Create")
 </p>
 <table class="table">
     <tr>
@@ -41,9 +41,9 @@
             @Html.DisplayFor(modelItem => item.Kartoteki.Nazwa)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id_Zamowienia }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id_Zamowienia }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id_Zamowienia })
+            @Html.ActionLink("Edycja", "Edit", new { id=item.Id_Zamowienia }) |
+            @Html.ActionLink("Szczegóły", "Details", new { id=item.Id_Zamowienia }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.Id_Zamowienia })
         </td>
     </tr>
 }

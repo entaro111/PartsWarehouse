@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<PartsWarehouse.Models.Kartoteki>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Kartoteki";
 }
 
-<h2>Index</h2>
+<h2>Kartoteki</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Stwórz nową kartotekę", "Create")
 </p>
 <table class="table">
     <tr>
@@ -53,9 +53,9 @@
             @Html.DisplayFor(modelItem => item.JM.Nazwa)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id_Kartoteki }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id_Kartoteki }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id_Kartoteki })
+            @Html.ActionLink("Edycja", "Edit", new { id=item.Id_Kartoteki }) |
+            @Html.ActionLink("Szczegóły", "Details", new { id=item.Id_Kartoteki }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.Id_Kartoteki })
         </td>
     </tr>
 }

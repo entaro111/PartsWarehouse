@@ -13,7 +13,7 @@ namespace PartsWarehouse.Controllers
     public class ZamowieniaController : Controller
     {
         private MagazynDBEntities db = new MagazynDBEntities();
-
+        public static Zamowienia zam;
         // GET: Zamowienia
         public ActionResult Index()
         {
@@ -53,6 +53,7 @@ namespace PartsWarehouse.Controllers
             if (ModelState.IsValid)
             {
                 db.Zamowienia.Add(zamowienia);
+                UpdateQuantityAfterNewOrder(zamowienia);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -73,6 +74,7 @@ namespace PartsWarehouse.Controllers
             {
                 return HttpNotFound();
             }
+            zam = zamowienia;
             ViewBag.Id_Kartoteki = new SelectList(db.Kartoteki, "Id_Kartoteki", "Nazwa", zamowienia.Id_Kartoteki);
             return View(zamowienia);
         }
@@ -84,9 +86,11 @@ namespace PartsWarehouse.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id_Zamowienia,Data_zamowienia,Realizacja,Id_Kartoteki,Ilosc")] Zamowienia zamowienia)
         {
+            
             if (ModelState.IsValid)
             {
                 db.Entry(zamowienia).State = EntityState.Modified;
+                UpdateQuantityAfterUpdate(zamowienia,zam);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -128,5 +132,47 @@ namespace PartsWarehouse.Controllers
             }
             base.Dispose(disposing);
         }
+        private void UpdateQuantityAfterNewOrder(Zamowienia zamowienie)
+        {
+            var kartoteka = db.Kartoteki.FirstOrDefault(x => x.Id_Kartoteki == zamowienie.Id_Kartoteki);
+            if (zamowienie.Realizacja) kartoteka.Stan += (int)zamowienie.Ilosc;
+
+        }
+
+        private int CalculateQuantityAfterUpdate(Zamowienia zamowienie, Zamowienia zamowieniePrzed)
+        {
+
+            
+            if (zamowienie.Ilosc != zamowieniePrzed.Ilosc)
+            {
+                if (zamowienie.Realizacja)
+                {
+                    if (zamowieniePrzed.Realizacja)
+                    {
+                        return (int)(zamowienie.Ilosc - zamowieniePrzed.Ilosc);
+                    }
+
+                    return (int)zamowienie.Ilosc;
+                }
+                else
+                {
+                    if (zamowieniePrzed.Realizacja)
+                    {
+                        return (int)zamowieniePrzed.Ilosc*(-1);
+                    }
+                    
+                }
+            }
+            return 0;
+           
+         }
+        private void UpdateQuantityAfterUpdate(Zamowienia zamowienie, Zamowienia zamowieniePrzed)
+        {
+            var kartoteka = db.Kartoteki.FirstOrDefault(x => x.Id_Kartoteki == zamowienie.Id_Kartoteki);
+            int quantityCalculated = CalculateQuantityAfterUpdate(zamowienie, zamowieniePrzed);
+
+            kartoteka.Stan += quantityCalculated;
+        }
     }
+
 }

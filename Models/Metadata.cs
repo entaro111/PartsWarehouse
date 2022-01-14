@@ -102,9 +102,9 @@ namespace PartsWarehouse.Models
     {
         [Required(ErrorMessage = "Podaj datę")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode =true)]
         [Display(Name = "Data zamówienia")]
-        public System.DateTime Data_zamowienia;
+        public DateTime Data_zamowienia;
         public bool Realizacja;
         [Display(Name = "Ilość")]
         [Required(ErrorMessage = "Podaj ilość")]

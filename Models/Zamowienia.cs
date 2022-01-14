@@ -11,7 +11,7 @@ namespace PartsWarehouse.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Zamowienia
     {
         public int Id_Zamowienia { get; set; }
@@ -19,7 +19,7 @@ namespace PartsWarehouse.Models
         public bool Realizacja { get; set; }
         public Nullable<int> Id_Kartoteki { get; set; }
         public Nullable<int> Ilosc { get; set; }
-    
+
         public virtual Kartoteki Kartoteki { get; set; }
     }
 }

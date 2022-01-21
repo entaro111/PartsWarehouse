@@ -13,7 +13,7 @@ namespace PartsWarehouse.Controllers
     public class PrzyjeciaController : Controller
     {
         private MagazynDBEntities db = new MagazynDBEntities();
-
+        private static Przyjecia przyjeciePrzedEdycja;
         // GET: Przyjecia
         public ActionResult Index()
         {
@@ -53,6 +53,7 @@ namespace PartsWarehouse.Controllers
             if (ModelState.IsValid)
             {
                 db.Przyjecia.Add(przyjecia);
+                UpdateQuantity(przyjecia, przyjeciePrzedEdycja);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -73,6 +74,7 @@ namespace PartsWarehouse.Controllers
             {
                 return HttpNotFound();
             }
+            przyjeciePrzedEdycja = przyjecia;
             ViewBag.Id_Kartoteki = new SelectList(db.Kartoteki, "Id_Kartoteki", "Nazwa", przyjecia.Id_Kartoteki);
             return View(przyjecia);
         }
@@ -87,6 +89,7 @@ namespace PartsWarehouse.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(przyjecia).State = EntityState.Modified;
+                UpdateQuantity(przyjecia, przyjeciePrzedEdycja);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -115,6 +118,7 @@ namespace PartsWarehouse.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Przyjecia przyjecia = db.Przyjecia.Find(id);
+            UpdateQuantityAfterDelete(przyjecia);
             db.Przyjecia.Remove(przyjecia);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -127,6 +131,37 @@ namespace PartsWarehouse.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private void UpdateQuantity(Przyjecia przyjecie, Przyjecia przyjeciePrzedEdycja)
+        {
+            var kartoteka = FindKartoteka(przyjecie);
+            if (przyjecie.Id_Przyjecia != 0)
+            {
+                int newAmount = CalculateNewAmount(przyjecie, przyjeciePrzedEdycja);
+                kartoteka.Stan += newAmount;
+            }
+            else
+            {
+                kartoteka.Stan += przyjecie.Ilosc;
+            }
+
+        }
+
+        private int CalculateNewAmount(Przyjecia przyjecie, Przyjecia przyjeciePrzedEdycja)
+        {
+            return przyjecie.Ilosc - przyjeciePrzedEdycja.Ilosc;
+        }
+
+        private void UpdateQuantityAfterDelete(Przyjecia przyjecie)
+        {
+            var kartoteka = FindKartoteka(przyjecie);
+            kartoteka.Stan -= przyjecie.Ilosc; ;
+        }
+
+        private Kartoteki FindKartoteka(Przyjecia przyjecie)
+        {
+            return db.Kartoteki.FirstOrDefault(x => x.Id_Kartoteki == przyjecie.Id_Kartoteki);
         }
     }
 }

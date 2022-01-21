@@ -13,7 +13,6 @@ namespace PartsWarehouse.Controllers
     public class ZamowieniaController : Controller
     {
         private MagazynDBEntities db = new MagazynDBEntities();
-        private static Zamowienia zam;
         // GET: Zamowienia
         public ActionResult Index()
         {
@@ -53,7 +52,6 @@ namespace PartsWarehouse.Controllers
             if (ModelState.IsValid)
             {
                 db.Zamowienia.Add(zamowienia);
-                UpdateQuantityAfterNewOrder(zamowienia);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -74,7 +72,6 @@ namespace PartsWarehouse.Controllers
             {
                 return HttpNotFound();
             }
-            zam = zamowienia;
             ViewBag.Id_Kartoteki = new SelectList(db.Kartoteki, "Id_Kartoteki", "Nazwa", zamowienia.Id_Kartoteki);
             return View(zamowienia);
         }
@@ -90,7 +87,6 @@ namespace PartsWarehouse.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(zamowienia).State = EntityState.Modified;
-                UpdateQuantityAfterUpdate(zamowienia,zam);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

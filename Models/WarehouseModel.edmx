@@ -39,6 +39,7 @@
           <Property Name="Id_JM" Type="int" Nullable="false" />
           <Property Name="Id_Dostawcy" Type="int" />
           <Property Name="Kod" Type="nvarchar" MaxLength="50" />
+          <Property Name="Niski_Stan" Type="int" />
         </EntityType>
         <EntityType Name="MPK">
           <Key>
@@ -271,6 +272,7 @@
           <NavigationProperty Name="Wydania" Relationship="Self.FK__Wydania__Id_Kart__5629CD9C" FromRole="Kartoteki" ToRole="Wydania" />
           <NavigationProperty Name="Zamowienia" Relationship="Self.FK__Zamowieni__Id_Ka__59063A47" FromRole="Kartoteki" ToRole="Zamowienia" />
           <Property Name="Kod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Niski_Stan" Type="Int32" />
         </EntityType>
         <EntityType Name="MPK">
           <Key>
@@ -500,6 +502,7 @@
           <EntitySetMapping Name="Kartoteki">
             <EntityTypeMapping TypeName="MagazynDBModel.Kartoteki">
               <MappingFragment StoreEntitySet="Kartoteki">
+                <ScalarProperty Name="Niski_Stan" ColumnName="Niski_Stan" />
                 <ScalarProperty Name="Kod" ColumnName="Kod" />
                 <ScalarProperty Name="Id_Kartoteki" ColumnName="Id_Kartoteki" />
                 <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />

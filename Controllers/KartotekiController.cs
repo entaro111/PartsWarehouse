@@ -46,7 +46,7 @@ namespace PartsWarehouse.Controllers
                     kartoteki = kartoteki.OrderBy(k => k.Nazwa);
                     break;
             }
-            int pageSize = 2;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(kartoteki.ToPagedList(pageNumber, pageSize));
         }
@@ -63,6 +63,7 @@ namespace PartsWarehouse.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(kartoteki);
         }
 
@@ -79,7 +80,7 @@ namespace PartsWarehouse.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_Kartoteki,Nazwa,Stan,Miejsce,Id_JM,Id_Dostawcy,Kod")] Kartoteki kartoteki)
+        public ActionResult Create([Bind(Include = "Id_Kartoteki,Nazwa,Stan,Niski_Stan,Miejsce,Id_JM,Id_Dostawcy,Kod")] Kartoteki kartoteki)
         {
 
             if (ModelState.IsValid)
@@ -117,7 +118,7 @@ namespace PartsWarehouse.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_Kartoteki,Nazwa,Stan,Miejsce,Id_JM,Id_Dostawcy,Kod")] Kartoteki kartoteki)
+        public ActionResult Edit([Bind(Include = "Id_Kartoteki,Nazwa,Stan,Niski_Stan,Miejsce,Id_JM,Id_Dostawcy,Kod")] Kartoteki kartoteki)
         {
             if (ModelState.IsValid)
             {

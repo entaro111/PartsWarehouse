@@ -78,6 +78,7 @@ namespace PartsWarehouse.Models
         [Display(Name = "Ilość")]
         public int Ilosc;
         [DataType(DataType.Date)]
+        [Display(Name = "Data przyjęcia")]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime Data_Przyjecia;
     }

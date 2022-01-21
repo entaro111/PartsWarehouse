@@ -18,7 +18,6 @@ namespace PartsWarehouse.Models
         public MagazynDBEntities()
             : base("name=MagazynDBEntities")
         {
-            Database.SetInitializer<PartsWarehouse.Models.MagazynDBEntities>(null);
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

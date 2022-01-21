@@ -1,0 +1,45 @@
+﻿@model IEnumerable<PartsWarehouse.Models.Przyjecia>
+
+@{
+    ViewBag.Title = "Przyjęcia";
+}
+
+<h2>Przyjęcia</h2>
+
+<p>
+    @Html.ActionLink("Stwórz nowe przyjęcie", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ilosc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Data_Przyjecia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kartoteki.Nazwa)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ilosc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data_Przyjecia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kartoteki.Nazwa)
+        </td>
+        <td>
+            @Html.ActionLink("Edycja", "Edit", new { id=item.Id_Przyjecia }) |
+            @Html.ActionLink("Szczegóły", "Details", new { id=item.Id_Przyjecia }) |
+            @Html.ActionLink("Usuń", "Delete", new { id=item.Id_Przyjecia })
+        </td>
+    </tr>
+}
+
+</table>

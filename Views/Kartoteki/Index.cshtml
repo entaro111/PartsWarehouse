@@ -15,21 +15,17 @@
             @Html.DisplayNameFor(model => model.Nazwa)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Stan)
+            @Html.DisplayNameFor(model => model.Kod)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Miejsce)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Kod)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Dostawcy.Nazwa)
+            @Html.DisplayNameFor(model => model.Stan)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.JM.Nazwa)
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -38,20 +34,18 @@
             @Html.DisplayFor(modelItem => item.Nazwa)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Stan)
+            @Html.DisplayFor(modelItem => item.Kod)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Miejsce)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Kod)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Dostawcy.Nazwa)
+            @Html.DisplayFor(modelItem => item.Stan)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.JM.Nazwa)
         </td>
+
         <td>
             @Html.ActionLink("Edycja", "Edit", new { id=item.Id_Kartoteki }) |
             @Html.ActionLink("Szczegóły", "Details", new { id=item.Id_Kartoteki }) |

@@ -7,8 +7,12 @@
 <h2>Szczegóły</h2>
 
 <div>
-    <h4>Kartoteki</h4>
+    <p>
+        @Html.ActionLink("Edycja", "Edit", new { id = Model.Id_Kartoteki }) |
+        @Html.ActionLink("Powrót", "Index")
+    </p>
     <hr />
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Nazwa)
@@ -16,22 +20,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Nazwa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Stan)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Stan)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Miejsce)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Miejsce)
         </dd>
 
         <dt>
@@ -43,11 +31,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Dostawcy.Nazwa)
+            @Html.DisplayNameFor(model => model.Miejsce)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Dostawcy.Nazwa)
+            @Html.DisplayFor(model => model.Miejsce)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stan)
         </dd>
 
         <dt>
@@ -58,9 +54,47 @@
             @Html.DisplayFor(model => model.JM.Nazwa)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Dostawcy.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dostawcy.Nazwa)
+        </dd>
+
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edycja", "Edit", new { id = Model.Id_Kartoteki }) |
-    @Html.ActionLink("Powrót", "Index")
-</p>
+<div>
+   
+    <table class="table">
+
+        <tr class="bg-warning">
+            <th>
+                @Html.DisplayNameFor(model => model.Miejsce)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Wydania.FirstOrDefault(x => x.Id_Kartoteki == model.Id_Kartoteki).Data_Wydania)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Wydania.FirstOrDefault(x => x.Id_Kartoteki == model.Id_Kartoteki).Ilosc)
+            </th>
+        </tr>
+        @foreach (var item in Model.Wydania)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MPK.Nazwa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data_Wydania)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ilosc)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+

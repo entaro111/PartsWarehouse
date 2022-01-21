@@ -139,6 +139,7 @@
     <Compile Include="Controllers\KartotekiController.cs" />
     <Compile Include="Controllers\MPKController.cs" />
     <Compile Include="Controllers\OsobyController.cs" />
+    <Compile Include="Controllers\PrzyjeciaController.cs" />
     <Compile Include="Controllers\WydaniaController.cs" />
     <Compile Include="Controllers\ZamowieniaController.cs" />
     <Compile Include="Global.asax.cs">
@@ -274,6 +275,11 @@
     <Content Include="Views\MPK\Details.cshtml" />
     <Content Include="Views\MPK\Edit.cshtml" />
     <Content Include="Views\MPK\Index.cshtml" />
+    <Content Include="Views\Przyjecia\Create.cshtml" />
+    <Content Include="Views\Przyjecia\Delete.cshtml" />
+    <Content Include="Views\Przyjecia\Details.cshtml" />
+    <Content Include="Views\Przyjecia\Edit.cshtml" />
+    <Content Include="Views\Przyjecia\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

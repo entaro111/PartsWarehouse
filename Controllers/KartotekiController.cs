@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using PartsWarehouse.Models;
 
 namespace PartsWarehouse.Controllers
@@ -15,10 +16,39 @@ namespace PartsWarehouse.Controllers
         private MagazynDBEntities db = new MagazynDBEntities();
 
         // GET: Kartoteki
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
+
+            if(searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
             var kartoteki = db.Kartoteki.Include(k => k.Dostawcy).Include(k => k.JM);
-            return View(kartoteki.ToList());
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                kartoteki = kartoteki.Where(k => k.Nazwa.ToUpper().Contains(searchString.ToUpper()) || k.Kod.ToUpper().Contains(searchString.ToUpper()));
+            }
+            switch (sortOrder)
+            {
+                case "Name_desc":
+                    kartoteki = kartoteki.OrderByDescending(k => k.Nazwa);
+                    break;
+                default:
+                    kartoteki = kartoteki.OrderBy(k => k.Nazwa);
+                    break;
+            }
+            int pageSize = 2;
+            int pageNumber = (page ?? 1);
+            return View(kartoteki.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Kartoteki/Details/5

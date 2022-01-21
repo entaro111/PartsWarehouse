@@ -1,5 +1,6 @@
-﻿@model IEnumerable<PartsWarehouse.Models.Kartoteki>
-
+﻿@model PagedList.IPagedList<PartsWarehouse.Models.Kartoteki>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Kartoteki";
 }
@@ -9,49 +10,63 @@
 <p>
     @Html.ActionLink("Stwórz nową kartotekę", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nazwa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Kod)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Miejsce)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Stan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.JM.Nazwa)
-        </th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nazwa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Kod)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Miejsce)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Stan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.JM.Nazwa)
-        </td>
-
-        <td>
-            @Html.ActionLink("Edycja", "Edit", new { id=item.Id_Kartoteki }) |
-            @Html.ActionLink("Szczegóły", "Details", new { id=item.Id_Kartoteki }) |
-            @Html.ActionLink("Usuń", "Delete", new { id=item.Id_Kartoteki })
-        </td>
-    </tr>
+@using (Html.BeginForm("Index", "Kartoteki", FormMethod.Get))
+{
+    <p>
+        Szukanie kartoteki: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Szukaj" />
+    </p>
 }
 
+<table class="table">
+    <tr class="bg-warning">
+        <th>
+            @Html.ActionLink("Nazwa", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            Kod
+        </th>
+        <th>
+            Miejsce
+        </th>
+        <th>
+            Stan
+        </th>
+        <th>
+            Jednostka
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nazwa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Miejsce)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JM.Nazwa)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edycja", "Edit", new { id = item.Id_Kartoteki }) |
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.Id_Kartoteki }) |
+                @Html.ActionLink("Usuń", "Delete", new { id = item.Id_Kartoteki })
+            </td>
+        </tr>
+    }
+
 </table>
+<br />
+Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

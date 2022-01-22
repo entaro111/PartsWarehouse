@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using PartsWarehouse.Models;
 
 namespace PartsWarehouse.Controllers
@@ -15,10 +16,47 @@ namespace PartsWarehouse.Controllers
         private MagazynDBEntities db = new MagazynDBEntities();
         private static Wydania wydaniePrzedEdycja;
         // GET: Wydania
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
+            ViewBag.MPKSortParm = sortOrder == "MPK" ? "MPK_desc" : "MPK";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
             var wydania = db.Wydania.Include(w => w.Kartoteki).Include(w => w.MPK).Include(w => w.Osoby);
-            return View(wydania.ToList());
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                wydania = wydania.Where(w => w.Kartoteki.Nazwa.ToUpper().Contains(searchString.ToUpper()) || w.Osoby.Imie.ToUpper().Contains(searchString.ToUpper()));
+            }
+            switch (sortOrder)
+            {
+                case "Name_desc":
+                    wydania = wydania.OrderByDescending(w => w.Kartoteki.Nazwa);
+                    break;
+                case "MPK":
+                    wydania = wydania.OrderBy(w => w.MPK.Nazwa);
+                    break;
+                case "MPK_desc":
+                    wydania = wydania.OrderByDescending(w => w.MPK.Nazwa);
+                    break;
+                default:
+                    wydania = wydania.OrderBy(w => w.Kartoteki.Nazwa);
+                    break;
+            }
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            return View(wydania.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Wydania/Details/5

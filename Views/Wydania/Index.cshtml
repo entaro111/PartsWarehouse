@@ -1,10 +1,19 @@
-﻿@model IEnumerable<PartsWarehouse.Models.Wydania>
-
+﻿@model PagedList.IPagedList<PartsWarehouse.Models.Wydania>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Wydania";
 }
 
 <h2>Wydania</h2>
+
+@using (Html.BeginForm("Index", "Wydania", FormMethod.Get))
+{
+    <p>
+        Szukanie wydania: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Szukaj" />
+    </p>
+}
 
 <p>
     @Html.ActionLink("Stwórz nowe wydanie", "Create")
@@ -12,46 +21,50 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Ilosc)
+            Ilość
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Data_Wydania)
+            Data Wydania
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Kartoteki.Nazwa)
+            @Html.ActionLink("Nazwa części", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MPK.Nazwa)
+            @Html.ActionLink("Miejsce", "Index", new { sortOrder = ViewBag.MPKSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Osoby.Imie)
+            Imię pracownika
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ilosc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Data_Wydania)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Kartoteki.Nazwa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MPK.Nazwa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Osoby.Imie)
-        </td>
-        <td>
-            @Html.ActionLink("Edycja", "Edit", new { id=item.Id_Wydania }) |
-            @Html.ActionLink("Szczegóły", "Details", new { id=item.Id_Wydania }) |
-            @Html.ActionLink("Usuń", "Delete", new { id=item.Id_Wydania })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ilosc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data_Wydania)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kartoteki.Nazwa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MPK.Nazwa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Osoby.Imie)
+            </td>
+            <td>
+                @Html.ActionLink("Edycja", "Edit", new { id = item.Id_Wydania }) |
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.Id_Wydania }) |
+                @Html.ActionLink("Usuń", "Delete", new { id = item.Id_Wydania })
+            </td>
+        </tr>
+    }
 
 </table>
+Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

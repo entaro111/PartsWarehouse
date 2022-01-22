@@ -18,19 +18,19 @@
 <table class="table">
     <tr>
         <th>
-            Ilość
-        </th>
-        <th>
-            Data Wydania
-        </th>
-        <th>
             @Html.ActionLink("Nazwa części", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
             @Html.ActionLink("Miejsce", "Index", new { sortOrder = ViewBag.MPKSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            Imię pracownika
+            Data Wydania
+        </th>
+        <th>
+            Ilość
+        </th>
+        <th>
+            Nazwisko pobierającego
         </th>
         <th></th>
     </tr>
@@ -39,19 +39,19 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Ilosc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data_Wydania)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Kartoteki.Nazwa)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MPK.Nazwa)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Osoby.Imie)
+                @Html.DisplayFor(modelItem => item.Data_Wydania)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ilosc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Osoby.Nazwisko)
             </td>
             <td>
                 @Html.ActionLink("Edycja", "Edit", new { id = item.Id_Wydania }) |

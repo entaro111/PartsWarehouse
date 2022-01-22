@@ -36,7 +36,7 @@ namespace PartsWarehouse.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                wydania = wydania.Where(w => w.Kartoteki.Nazwa.ToUpper().Contains(searchString.ToUpper()) || w.Osoby.Imie.ToUpper().Contains(searchString.ToUpper()));
+                wydania = wydania.Where(w => w.Kartoteki.Nazwa.ToUpper().Contains(searchString.ToUpper()) || w.Osoby.Nazwisko.ToUpper().Contains(searchString.ToUpper()));
             }
             switch (sortOrder)
             {

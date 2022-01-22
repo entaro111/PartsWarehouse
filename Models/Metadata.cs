@@ -98,7 +98,7 @@ namespace PartsWarehouse.Models
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name ="Data wydania")]
         public Nullable<System.DateTime> Data_Wydania;
-        [Required(ErrorMessage = "Wybierz osobę")]
+        [Required(ErrorMessage = "Wybierz pobierającego")]
         public int Id_Osoby;
         [Required(ErrorMessage = "Wybierz część")]
         public int Id_Kartoteki;

@@ -13,7 +13,7 @@ namespace PartsWarehouse.Controllers
     public class WydaniaController : Controller
     {
         private MagazynDBEntities db = new MagazynDBEntities();
-
+        private static Wydania wydaniePrzedEdycja;
         // GET: Wydania
         public ActionResult Index()
         {
@@ -56,11 +56,11 @@ namespace PartsWarehouse.Controllers
             if (ModelState.IsValid)
             {
                 db.Wydania.Add(wydania);
-                TakeOffQuantity(wydania.Id_Kartoteki, wydania.Ilosc);
+                UpdateQuantity(wydania, wydaniePrzedEdycja);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            
+
             ViewBag.Id_Kartoteki = new SelectList(db.Kartoteki, "Id_Kartoteki", "Nazwa", wydania.Id_Kartoteki);
             ViewBag.Id_MPK = new SelectList(db.MPK, "Id_MPK", "Nazwa", wydania.Id_MPK);
             ViewBag.Id_Osoby = new SelectList(db.Osoby, "Id_Osoby", "Imie", wydania.Id_Osoby);
@@ -79,6 +79,7 @@ namespace PartsWarehouse.Controllers
             {
                 return HttpNotFound();
             }
+            wydaniePrzedEdycja = wydania;
             ViewBag.Id_Kartoteki = new SelectList(db.Kartoteki, "Id_Kartoteki", "Nazwa", wydania.Id_Kartoteki);
             ViewBag.Id_MPK = new SelectList(db.MPK, "Id_MPK", "Nazwa", wydania.Id_MPK);
             ViewBag.Id_Osoby = new SelectList(db.Osoby, "Id_Osoby", "Imie", wydania.Id_Osoby);
@@ -93,9 +94,10 @@ namespace PartsWarehouse.Controllers
         public ActionResult Edit([Bind(Include = "Id_Wydania,Ilosc,Data_Wydania,Id_MPK,Id_Osoby,Id_Kartoteki")] Wydania wydania)
         {
 
-                if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 db.Entry(wydania).State = EntityState.Modified;
+                UpdateQuantity(wydania, wydaniePrzedEdycja);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -126,7 +128,7 @@ namespace PartsWarehouse.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Wydania wydania = db.Wydania.Find(id);
-            ReturnQuantity(wydania.Id_Kartoteki, wydania.Ilosc);
+            UpdateQuantityAfterDelete(wydania);
             db.Wydania.Remove(wydania);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -145,21 +147,40 @@ namespace PartsWarehouse.Controllers
         {
             var kartoteka = db.Kartoteki.FirstOrDefault(x => x.Id_Kartoteki == Id_Kartoteki);
             if (kartoteka.Stan - Ilosc > 0) return Json(true, JsonRequestBehavior.AllowGet);
-            else return Json(false,JsonRequestBehavior.DenyGet);
+            else return Json(false, JsonRequestBehavior.DenyGet);
         }
 
-        private void TakeOffQuantity(int Id_Kartoteki, int Ilosc)
+        private void UpdateQuantity(Wydania wydanie, Wydania wydaniePrzedEdycja)
         {
-            var kartoteka = db.Kartoteki.FirstOrDefault(x => x.Id_Kartoteki == Id_Kartoteki);
-            kartoteka.Stan -= Ilosc;
+            var kartoteka = FindKartoteka(wydanie);
+            if (wydanie.Id_Wydania != 0)
+            {
+                int newAmount = CalculateNewAmount(wydanie, wydaniePrzedEdycja);
+                kartoteka.Stan -= newAmount;
+            }
+            else
+            {
+                kartoteka.Stan -= wydanie.Ilosc;
+            }
+
         }
 
-        private void ReturnQuantity(int Id_Kartoteki, int Ilosc)
+        private int CalculateNewAmount(Wydania wydanie, Wydania wydaniePrzedEdycja)
         {
-            var kartoteka = db.Kartoteki.FirstOrDefault(x => x.Id_Kartoteki == Id_Kartoteki);
-            kartoteka.Stan += Ilosc;
+            return wydanie.Ilosc - wydaniePrzedEdycja.Ilosc;
         }
 
-        
+        private void UpdateQuantityAfterDelete(Wydania wydanie)
+        {
+            var kartoteka = FindKartoteka(wydanie);
+            kartoteka.Stan += wydanie.Ilosc; ;
+        }
+
+        private Kartoteki FindKartoteka(Wydania wydanie)
+        {
+            return db.Kartoteki.FirstOrDefault(x => x.Id_Kartoteki == wydanie.Id_Kartoteki);
+        }
+
+
     }
 }

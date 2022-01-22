@@ -189,5 +189,10 @@ namespace PartsWarehouse.Controllers
             if (id == 0) return !db.Kartoteki.Any(x => x.Kod == Code);
             else return !db.Kartoteki.Any(x => x.Kod == Code && x.Id_Kartoteki != id);
         }
+
+        public ActionResult NewWydanie(int id)
+        {
+            return RedirectToAction("Create", "Wydania", new { id = id });
+        }
     }
 }

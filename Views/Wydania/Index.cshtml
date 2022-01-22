@@ -10,14 +10,11 @@
 @using (Html.BeginForm("Index", "Wydania", FormMethod.Get))
 {
     <p>
-        Szukanie wydania: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
+        Filtruj po nazwie kartoteki: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Szukaj" />
     </p>
 }
 
-<p>
-    @Html.ActionLink("Stwórz nowe wydanie", "Create")
-</p>
 <table class="table">
     <tr>
         <th>

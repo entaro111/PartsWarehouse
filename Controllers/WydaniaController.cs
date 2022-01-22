@@ -73,11 +73,10 @@ namespace PartsWarehouse.Controllers
             }
             return View(wydania);
         }
-
-        // GET: Wydania/Create
-        public ActionResult Create()
+        // GET: Wydania/Create/id
+        public ActionResult Create(int id)
         {
-            ViewBag.Id_Kartoteki = new SelectList(db.Kartoteki, "Id_Kartoteki", "Nazwa");
+            ViewBag.Id_Kartoteki = new SelectList(db.Kartoteki, "Id_Kartoteki", "Nazwa", id);
             ViewBag.Id_MPK = new SelectList(db.MPK, "Id_MPK", "Nazwa");
             ViewBag.Id_Osoby = new SelectList(db.Osoby, "Id_Osoby", "Imie");
             return View();

@@ -8,7 +8,6 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-
 }
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -25,4 +24,10 @@ textarea {
 }
 .navbar-brand {
     padding-right: 50px;
+}
+
+.detailed-list{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
 }

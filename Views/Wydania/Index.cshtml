@@ -18,16 +18,17 @@
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Nazwa części", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Data Wydania", "Index", new { sortOrder = ViewBag.DateSortParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink("Miejsce", "Index", new { sortOrder = ViewBag.MPKSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            Data Wydania
+            @Html.ActionLink("Nazwa części", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
             Ilość
+        </th>
+
+        <th>
+            Miejsce
         </th>
         <th>
             Nazwisko pobierającego
@@ -39,24 +40,22 @@
     {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Data_Wydania)        
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Kartoteki.Nazwa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MPK.Nazwa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data_Wydania)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Ilosc)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.MPK.Nazwa)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Osoby.Nazwisko)
             </td>
             <td>
-                @Html.ActionLink("Edycja", "Edit", new { id = item.Id_Wydania }) |
-                @Html.ActionLink("Szczegóły", "Details", new { id = item.Id_Wydania }) |
-                @Html.ActionLink("Usuń", "Delete", new { id = item.Id_Wydania })
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.Id_Wydania })
             </td>
         </tr>
     }

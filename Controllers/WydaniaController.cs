@@ -19,8 +19,9 @@ namespace PartsWarehouse.Controllers
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
-            ViewBag.MPKSortParm = sortOrder == "MPK" ? "MPK_desc" : "MPK";
+            ViewBag.DateSortParam = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
+            ViewBag.NameSortParam = sortOrder == "Name" ? "Name_desc" : "Name";
+            
 
             if (searchString != null)
             {
@@ -43,14 +44,14 @@ namespace PartsWarehouse.Controllers
                 case "Name_desc":
                     wydania = wydania.OrderByDescending(w => w.Kartoteki.Nazwa);
                     break;
-                case "MPK":
-                    wydania = wydania.OrderBy(w => w.MPK.Nazwa);
+                case "Date":
+                    wydania = wydania.OrderBy(w => w.Data_Wydania);
                     break;
-                case "MPK_desc":
-                    wydania = wydania.OrderByDescending(w => w.MPK.Nazwa);
+                case "Name":
+                    wydania = wydania.OrderBy(w => w.Kartoteki.Nazwa);
                     break;
                 default:
-                    wydania = wydania.OrderBy(w => w.Kartoteki.Nazwa);
+                    wydania = wydania.OrderByDescending(w => w.Data_Wydania);
                     break;
             }
             int pageSize = 10;

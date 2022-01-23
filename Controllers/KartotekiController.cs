@@ -59,6 +59,8 @@ namespace PartsWarehouse.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Kartoteki kartoteki = db.Kartoteki.Find(id);
+            var wydania = kartoteki.Wydania.OrderByDescending(w => w.Data_Wydania).Take(10).ToList();
+            ViewBag.LastWydania = wydania;
             if (kartoteki == null)
             {
                 return HttpNotFound();

@@ -26,8 +26,11 @@ textarea {
     padding-right: 50px;
 }
 
-.detailed-list{
+.detailed-list {
     display: flex;
     justify-content: center;
-    padding: 10px;
+    margin-left: -75px;
+}
+.table td {
+    vertical-align: middle !important;
 }

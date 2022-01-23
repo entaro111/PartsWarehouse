@@ -3,18 +3,22 @@
     ViewBag.Title = "Kartoteka - szczegóły";
 }
 
-<h2>Szczegóły</h2>
 
-<div>
+<div class="text-center">
+    <h2>Szczegóły</h2>
+    <h4>Części</h4>
+    <hr />
     <p>
-        @Html.ActionLink("Edycja", "Edit", new { id = Model.Id_Kartoteki }) |
-        @Html.ActionLink("Powrót", "Index")
+        @Html.ActionLink("Edycja", "Edit", new { id = Model.Id_Kartoteki }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Usuń", "Delete", new { id = Model.Id_Kartoteki }, new { @class = "btn btn-danger" })
+        @Html.ActionLink("Powrót", "Index", null, new { @class = "btn btn-default" })
     </p>
     <hr />
-
+</div>
+<div class="detailed-list">
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Nazwa)
+            @Html.DisplayNameFor(model => model.Nazwa):
         </dt>
 
         <dd>
@@ -22,7 +26,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Kod)
+            @Html.DisplayNameFor(model => model.Kod):
         </dt>
 
         <dd>
@@ -30,7 +34,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Miejsce)
+            @Html.DisplayNameFor(model => model.Miejsce):
         </dt>
 
         <dd>
@@ -38,7 +42,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Stan)
+            @Html.DisplayNameFor(model => model.Stan):
         </dt>
 
         <dd>
@@ -46,7 +50,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Niski_Stan)
+            @Html.DisplayNameFor(model => model.Niski_Stan):
         </dt>
 
         <dd>
@@ -54,7 +58,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.JM.Nazwa)
+            @Html.DisplayNameFor(model => model.JM.Nazwa):
         </dt>
 
         <dd>
@@ -62,7 +66,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Dostawcy.Nazwa)
+            @Html.DisplayNameFor(model => model.Dostawcy.Nazwa):
         </dt>
 
         <dd>
@@ -72,7 +76,7 @@
     </dl>
 </div>
 <div>
-   
+    <hr />
     <table class="table">
 
         <tr class="bg-warning">
@@ -86,7 +90,7 @@
                 @Html.DisplayNameFor(model => model.Wydania.FirstOrDefault(x => x.Id_Kartoteki == model.Id_Kartoteki).Ilosc)
             </th>
         </tr>
-        @foreach (var item in Model.Wydania)
+        @foreach (var item in (List<PartsWarehouse.Models.Wydania>)ViewBag.LastWydania)
         {
             <tr>
                 <td>
@@ -100,7 +104,6 @@
                 </td>
             </tr>
         }
-
     </table>
 </div>
 

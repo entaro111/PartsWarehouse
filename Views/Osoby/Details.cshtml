@@ -3,12 +3,19 @@
 @{
     ViewBag.Title = "Pracownik - szczegóły";
 }
-
-<h2>Szczegóły</h2>
-
-<div>
+<div class="text-center">
+    <h2>Szczegóły</h2>
     <h4>Osoby</h4>
     <hr />
+    <p>
+        @Html.ActionLink("Edycja", "Edit", new { id = Model.Id_Osoby }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Usuń", "Delete", new { id = Model.Id_Osoby }, new { @class = "btn btn-danger" })
+        @Html.ActionLink("Powrót", "Index", null, new { @class = "btn btn-default" })
+    </p>
+    <hr />
+</div>
+
+<div class="detailed-list">
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Imie)
@@ -35,27 +42,25 @@
         </dd>
 
     </dl>
-    <div class="table">
-        <table>
-            <tr>
-                <th>Część</th>
-                <th>Data wydania</th>
-            </tr>
-            @foreach( var item in Model.Wydania)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Kartoteki.Nazwa)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Data_Wydania)
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
+
 </div>
-<p>
-    @Html.ActionLink("Edycja", "Edit", new { id = Model.Id_Osoby }) |
-    @Html.ActionLink("Powrót", "Index")
-</p>
+<div>
+    <hr />
+    <table class="table">
+        <tr class="bg-warning">
+            <th>Część</th>
+            <th>Data wydania</th>
+        </tr>
+        @foreach (var item in Model.Wydania)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kartoteki.Nazwa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data_Wydania)
+                </td>
+            </tr>
+        }
+    </table>
+</div>

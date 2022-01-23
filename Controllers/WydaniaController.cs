@@ -96,7 +96,7 @@ namespace PartsWarehouse.Controllers
                 db.Wydania.Add(wydania);
                 UpdateQuantity(wydania, wydaniePrzedEdycja);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Kartoteki");
             }
 
             ViewBag.Id_Kartoteki = new SelectList(db.Kartoteki, "Id_Kartoteki", "Nazwa", wydania.Id_Kartoteki);
@@ -180,7 +180,7 @@ namespace PartsWarehouse.Controllers
             }
             base.Dispose(disposing);
         }
-
+        [HttpPost]
         public JsonResult stanKartoteki(int Ilosc, int? Id_Kartoteki)
         {
             var kartoteka = db.Kartoteki.FirstOrDefault(x => x.Id_Kartoteki == Id_Kartoteki);

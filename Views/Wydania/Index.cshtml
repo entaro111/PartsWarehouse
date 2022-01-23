@@ -5,15 +5,22 @@
     ViewBag.Title = "Wydania";
 }
 
-<h2>Wydania</h2>
+<h2 class="text-center">Wydania</h2>
+<hr/>
+<div>
+    @using (Html.BeginForm("Index", "Wydania", FormMethod.Get))
+    {
+    <div class="pull-right">
+            Filtruj po nazwie kartoteki:
+        <p>
+            @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Szukaj" class="btn btn-default"/>
+        </p>
+    </div>
 
-@using (Html.BeginForm("Index", "Wydania", FormMethod.Get))
-{
-    <p>
-        Filtruj po nazwie kartoteki: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Szukaj" />
-    </p>
-}
+    }
+</div>
+
 
 <table class="table">
     <tr>
@@ -55,12 +62,13 @@
                 @Html.DisplayFor(modelItem => item.Osoby.Nazwisko)
             </td>
             <td>
-                @Html.ActionLink("Szczegóły", "Details", new { id = item.Id_Wydania })
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.Id_Wydania }, new { @class = "btn btn-default btn-sm" })
             </td>
         </tr>
     }
 
 </table>
+<hr/>
 Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
 
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

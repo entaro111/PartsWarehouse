@@ -51,10 +51,9 @@ namespace PartsWarehouse.Models
         [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
         [Remote("codeExist", "Kartoteki",AdditionalFields = "Id_Kartoteki", HttpMethod = "POST", ErrorMessage = "Kod już istnieje")]
         public string Kod { get; set; }
-
         [Required(ErrorMessage = "Podaj stan ostrzegawczy")]
         [Display(Name = "Niski stan")]
-        [Range(1,Int32.MaxValue)]
+        [Range(1, Int32.MaxValue)]
         public int Niski_Stan;
     }
 
@@ -92,7 +91,7 @@ namespace PartsWarehouse.Models
     {
         [Required(ErrorMessage = "Podaj ilość")]
         [Display(Name = "Ilość")]
-        [Remote("stanKartoteki", "Wydania", AdditionalFields ="Id_Kartoteki", ErrorMessage = "Za dużo chcesz", HttpMethod = "POST")]
+        [Remote("stanKartoteki", "Wydania", AdditionalFields ="Id_Kartoteki", ErrorMessage = "Przekroczony dostępny stan", HttpMethod = "POST")]
         public int Ilosc { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]

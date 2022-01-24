@@ -76,35 +76,39 @@
 
     </dl>
 </div>
-<div>
-    <hr />
-    <table class="table">
-        <tr class="bg-warning">
-            <th>
-                @Html.DisplayNameFor(model => model.Miejsce)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Wydania.FirstOrDefault(x => x.Id_Kartoteki == model.Id_Kartoteki).Data_Wydania)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Wydania.FirstOrDefault(x => x.Id_Kartoteki == model.Id_Kartoteki).Ilosc)
-            </th>
-        </tr>
-        @foreach (var item in (List<PartsWarehouse.Models.Wydania>)ViewBag.LastWydania)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MPK.Nazwa)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Data_Wydania)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ilosc)
-                </td>
+@if (Model.Wydania.Count != 0)
+{
+    <div>
+        <hr />
+        <table class="table">
+            <tr class="bg-warning">
+                <th>
+                    @Html.DisplayNameFor(model => model.Miejsce)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Wydania.FirstOrDefault(x => x.Id_Kartoteki == model.Id_Kartoteki).Data_Wydania)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Wydania.FirstOrDefault(x => x.Id_Kartoteki == model.Id_Kartoteki).Ilosc)
+                </th>
             </tr>
-        }
-    </table>
-</div>
+            @foreach (var item in (List<PartsWarehouse.Models.Wydania>)ViewBag.LastWydania)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MPK.Nazwa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data_Wydania)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ilosc)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+
 
 

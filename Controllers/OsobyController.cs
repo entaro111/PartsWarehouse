@@ -69,6 +69,7 @@ namespace PartsWarehouse.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.LastWydania = osoby.Wydania.OrderByDescending(w => w.Data_Wydania).Take(10).ToList();
             return View(osoby);
         }
 

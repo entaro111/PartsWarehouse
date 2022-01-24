@@ -18,7 +18,7 @@
 <div class="detailed-list">
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Imie)
+            @Html.DisplayNameFor(model => model.Imie):
         </dt>
 
         <dd>
@@ -26,7 +26,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Nazwisko)
+            @Html.DisplayNameFor(model => model.Nazwisko):
         </dt>
 
         <dd>
@@ -34,7 +34,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Dzialy.Nazwa)
+            @Html.DisplayNameFor(model => model.Dzialy.Nazwa):
         </dt>
 
         <dd>
@@ -44,23 +44,31 @@
     </dl>
 
 </div>
-<div>
-    <hr />
-    <table class="table">
-        <tr class="bg-warning">
-            <th>Część</th>
-            <th>Data wydania</th>
-        </tr>
-        @foreach (var item in Model.Wydania)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Kartoteki.Nazwa)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Data_Wydania)
-                </td>
+@if (Model.Wydania.Count > 0)
+{
+    <div>
+        <hr />
+        <table class="table">
+            <tr class="bg-warning">
+                <th>Część</th>
+                <th>Ilość</th>
+                <th>Data wydania</th>
             </tr>
-        }
-    </table>
-</div>
+            @foreach (var item in (List<PartsWarehouse.Models.Wydania>)ViewBag.LastWydania)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Kartoteki.Nazwa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelIte => item.Ilosc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data_Wydania)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+

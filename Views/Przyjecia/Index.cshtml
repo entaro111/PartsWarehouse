@@ -50,8 +50,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Ilosc)
             </td>
-            <td>
-                @Html.ActionLink("Szczegóły", "Details", new { id = item.Id_Przyjecia }, new { @class = "btn btn-default btn-sm" })
+            <td class="text-center">
+                @Html.ActionLink("Edycja", "Edit", new { id = item.Id_Przyjecia }, new { @class = "btn btn-default btn-sm" })
+                @Html.ActionLink("Usuń", "Delete", new { id = item.Id_Przyjecia }, new { @class = "btn btn-danger btm-sm" })
             </td>
         </tr>
     }

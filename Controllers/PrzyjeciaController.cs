@@ -58,21 +58,6 @@ namespace PartsWarehouse.Controllers
             return View(przyjecia.ToPagedList(pageNumber, pageSize));
         }
 
-        // GET: Przyjecia/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Przyjecia przyjecia = db.Przyjecia.Find(id);
-            if (przyjecia == null)
-            {
-                return HttpNotFound();
-            }
-            return View(przyjecia);
-        }
-
         // GET: Przyjecia/Create
         public ActionResult Create()
         {

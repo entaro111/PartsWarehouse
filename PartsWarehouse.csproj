@@ -257,7 +257,6 @@
     <Content Include="Views\Osoby\Index.cshtml" />
     <Content Include="Views\Wydania\Create.cshtml" />
     <Content Include="Views\Wydania\Delete.cshtml" />
-    <Content Include="Views\Wydania\Details.cshtml" />
     <Content Include="Views\Wydania\Edit.cshtml" />
     <Content Include="Views\Wydania\Index.cshtml" />
     <Content Include="Views\Kartoteki\Create.cshtml" />
@@ -277,7 +276,6 @@
     <Content Include="Views\MPK\Index.cshtml" />
     <Content Include="Views\Przyjecia\Create.cshtml" />
     <Content Include="Views\Przyjecia\Delete.cshtml" />
-    <Content Include="Views\Przyjecia\Details.cshtml" />
     <Content Include="Views\Przyjecia\Edit.cshtml" />
     <Content Include="Views\Przyjecia\Index.cshtml" />
   </ItemGroup>

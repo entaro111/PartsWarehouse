@@ -60,20 +60,6 @@ namespace PartsWarehouse.Controllers
             return View(wydania.ToPagedList(pageNumber, pageSize));
         }
 
-        // GET: Wydania/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Wydania wydania = db.Wydania.Find(id);
-            if (wydania == null)
-            {
-                return HttpNotFound();
-            }
-            return View(wydania);
-        }
         // GET: Wydania/Create/id
         public ActionResult Create(int id)
         {

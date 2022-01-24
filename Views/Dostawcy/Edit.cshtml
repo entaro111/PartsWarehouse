@@ -3,17 +3,19 @@
 @{
     ViewBag.Title = "Dostawca - edycja";
 }
-
-<h2>Edycja</h2>
+<div class="text-center">
+    <h2>Edycja</h2>
+    <h4>Dostawcy</h4>
+    <hr />
+</div>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Dostawcy</h4>
-        <hr />
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id_Dostawcy)
 
@@ -42,17 +44,13 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Zapisz" class="btn btn-default" />
+            <div class="col-md-offset-3 col-md-10">
+                <input type="submit" value="Zapisz" class="btn btn-default btn-success" />
+                @Html.ActionLink("Powrót", "Index", null, new { @class = "btn btn-default" })
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Powrót", "Index")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

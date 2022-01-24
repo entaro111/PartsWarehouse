@@ -34,3 +34,9 @@ textarea {
 .table td {
     vertical-align: middle !important;
 }
+
+.form-horizontal{
+    display:flex;
+    flex-direction:column;   
+    margin-left:30%;
+}

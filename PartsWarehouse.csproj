@@ -266,7 +266,6 @@
     <Content Include="Views\Kartoteki\Index.cshtml" />
     <Content Include="Views\Zamowienia\Create.cshtml" />
     <Content Include="Views\Zamowienia\Delete.cshtml" />
-    <Content Include="Views\Zamowienia\Details.cshtml" />
     <Content Include="Views\Zamowienia\Edit.cshtml" />
     <Content Include="Views\Zamowienia\Index.cshtml" />
     <Content Include="Views\MPK\Create.cshtml" />

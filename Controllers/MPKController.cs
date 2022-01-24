@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using PartsWarehouse.Models;
 
 namespace PartsWarehouse.Controllers
@@ -15,9 +16,40 @@ namespace PartsWarehouse.Controllers
         private MagazynDBEntities db = new MagazynDBEntities();
 
         // GET: MPK
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.MPK.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
+            var MPK = db.MPK.AsQueryable();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                MPK = MPK.Where(m => m.Nazwa.ToUpper().Contains(searchString.ToUpper()));
+            }
+            switch (sortOrder)
+            {
+                case "Name_desc":
+                    MPK = MPK.OrderByDescending(m => m.Nazwa);
+                    break;
+                default:
+                    MPK = MPK.OrderBy(m => m.Nazwa);
+                    break;
+            }
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            return View(MPK.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: MPK/Details/5

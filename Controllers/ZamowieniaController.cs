@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using PartsWarehouse.Models;
 
 namespace PartsWarehouse.Controllers
@@ -14,25 +15,48 @@ namespace PartsWarehouse.Controllers
     {
         private MagazynDBEntities db = new MagazynDBEntities();
         // GET: Zamowienia
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            var zamowienia = db.Zamowienia.Include(z => z.Kartoteki);
-            return View(zamowienia.ToList());
-        }
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.DateSortParam = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
+            ViewBag.NameSortParam = sortOrder == "Name" ? "Name_desc" : "Name";
 
-        // GET: Zamowienia/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
+            if (searchString != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                page = 1;
             }
-            Zamowienia zamowienia = db.Zamowienia.Find(id);
-            if (zamowienia == null)
+            else
             {
-                return HttpNotFound();
+                searchString = currentFilter;
             }
-            return View(zamowienia);
+            ViewBag.CurrentFilter = searchString;
+
+
+            var zamowienia = db.Zamowienia.Include(z => z.Kartoteki);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                zamowienia = zamowienia.Where(z => z.Kartoteki.Nazwa.ToUpper().Contains(searchString.ToUpper()));
+            }
+            switch (sortOrder)
+            {
+                case "Name_desc":
+                    zamowienia = zamowienia.OrderByDescending(z => z.Kartoteki.Nazwa);
+                    break;
+                case "Date":
+                    zamowienia = zamowienia.OrderBy(z => z.Data_zamowienia);
+                    break;
+                case "Name":
+                    zamowienia = zamowienia.OrderBy(z => z.Kartoteki.Nazwa);
+                    break;
+                default:
+                    zamowienia = zamowienia.OrderByDescending(z => z.Data_zamowienia);
+                    break;
+            }
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            return View(zamowienia.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Zamowienia/Create

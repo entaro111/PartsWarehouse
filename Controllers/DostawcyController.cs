@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using PartsWarehouse.Models;
 
 namespace PartsWarehouse.Controllers
@@ -15,9 +16,40 @@ namespace PartsWarehouse.Controllers
         private MagazynDBEntities db = new MagazynDBEntities();
 
         // GET: Dostawcy
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.Dostawcy.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
+            var dostawcy = db.Dostawcy.AsQueryable();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                dostawcy = dostawcy.Where(d => d.Nazwa.ToUpper().Contains(searchString.ToUpper()));
+            }
+            switch (sortOrder)
+            {
+                case "Name_desc":
+                    dostawcy = dostawcy.OrderByDescending(d => d.Nazwa);
+                    break;
+                default:
+                    dostawcy = dostawcy.OrderBy(d => d.Nazwa);
+                    break;
+            }
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            return View(dostawcy.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Dostawcy/Details/5

@@ -1,45 +1,63 @@
-﻿@model IEnumerable<PartsWarehouse.Models.Przyjecia>
-
+﻿@model PagedList.IPagedList<PartsWarehouse.Models.Przyjecia>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Przyjęcia";
 }
 
-<h2>Przyjęcia</h2>
+<h2 class="text-center">Przyjęcia</h2>
+<hr />
+<div>
+    <p class="col-sm-1">
+        @Html.ActionLink("Stwórz nowe przyjęcie", "Create", null, new { @class = "btn btn-default" })
+    </p>
+    @using (Html.BeginForm("Index", "Przyjecia", FormMethod.Get))
+    {
+        <div class="pull-right">
+            Filtruj po nazwie kartoteki:
+            <p>
+                @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
+                <input type="submit" value="Szukaj" class="btn btn-default" />
+            </p>
+        </div>
 
-<p>
-    @Html.ActionLink("Stwórz nowe przyjęcie", "Create")
-</p>
+    }
+</div>
+
 <table class="table">
-    <tr>
+    <tr class="breadcrumb">
         <th>
-            @Html.DisplayNameFor(model => model.Ilosc)
+            @Html.ActionLink("Data Przyjęcia", "Index", new { sortOrder = ViewBag.DateSortParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Data_Przyjecia)
+            @Html.ActionLink("Nazwa części", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Kartoteki.Nazwa)
+            Ilość
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ilosc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Data_Przyjecia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Kartoteki.Nazwa)
-        </td>
-        <td>
-            @Html.ActionLink("Edycja", "Edit", new { id=item.Id_Przyjecia }) |
-            @Html.ActionLink("Szczegóły", "Details", new { id=item.Id_Przyjecia }) |
-            @Html.ActionLink("Usuń", "Delete", new { id=item.Id_Przyjecia })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data_Przyjecia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kartoteki.Nazwa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ilosc)
+            </td>
+            <td>
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.Id_Przyjecia }, new { @class = "btn btn-default btn-sm" })
+            </td>
+        </tr>
+    }
 
 </table>
+<hr />
+Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using PartsWarehouse.Models;
 
 namespace PartsWarehouse.Controllers
@@ -15,10 +16,46 @@ namespace PartsWarehouse.Controllers
         private MagazynDBEntities db = new MagazynDBEntities();
         private static Przyjecia przyjeciePrzedEdycja;
         // GET: Przyjecia
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.DateSortParam = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
+            ViewBag.NameSortParam = sortOrder == "Name" ? "Name_desc" : "Name";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
             var przyjecia = db.Przyjecia.Include(p => p.Kartoteki);
-            return View(przyjecia.ToList());
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                przyjecia = przyjecia.Where(w => w.Kartoteki.Nazwa.ToUpper().Contains(searchString.ToUpper()));
+            }
+            switch (sortOrder)
+            {
+                case "Name_desc":
+                    przyjecia = przyjecia.OrderByDescending(p => p.Kartoteki.Nazwa);
+                    break;
+                case "Date":
+                    przyjecia = przyjecia.OrderBy(p => p.Data_Przyjecia);
+                    break;
+                case "Name":
+                    przyjecia = przyjecia.OrderBy(p => p.Kartoteki.Nazwa);
+                    break;
+                default:
+                    przyjecia = przyjecia.OrderByDescending(p => p.Data_Przyjecia);
+                    break;
+            }
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(przyjecia.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Przyjecia/Details/5

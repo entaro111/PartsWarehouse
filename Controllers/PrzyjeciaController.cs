@@ -59,9 +59,9 @@ namespace PartsWarehouse.Controllers
         }
 
         // GET: Przyjecia/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            ViewBag.Id_Kartoteki = new SelectList(db.Kartoteki, "Id_Kartoteki", "Nazwa");
+            ViewBag.Id_Kartoteki = new SelectList(db.Kartoteki, "Id_Kartoteki", "Nazwa", id);
             return View();
         }
 

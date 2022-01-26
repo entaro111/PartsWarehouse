@@ -53,18 +53,16 @@ namespace PartsWarehouse.Controllers
         }
 
         // GET: Dostawcy/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id, int? page)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Dostawcy dostawcy = db.Dostawcy.Find(id);
-            if (dostawcy == null)
-            {
-                return HttpNotFound();
-            }
-            return View(dostawcy);
+            page = 1;
+            var kartoteki = db.Kartoteki.Include(k => k.Dostawcy).Include(k => k.JM);
+            kartoteki = kartoteki.Where(k => k.Dostawcy.Id_Dostawcy == id);
+            kartoteki = kartoteki.OrderBy(k => k.Nazwa);
+            ViewBag.Id = id;
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(kartoteki.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Dostawcy/Create
@@ -155,5 +153,6 @@ namespace PartsWarehouse.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

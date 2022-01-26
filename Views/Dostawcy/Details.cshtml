@@ -1,42 +1,61 @@
-﻿@model PartsWarehouse.Models.Dostawcy
-
+﻿@model PagedList.IPagedList<PartsWarehouse.Models.Kartoteki>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
-    ViewBag.Title = "Dostawca - szczegóły";
+    ViewBag.Title = "Dostawca - Lista części";
 }
-
-<h2>Szczegóły</h2>
-
-<div>
-    <h4>Dostawcy</h4>
+<div class="text-center">
+    <h2>Szczegóły</h2>
+    <h4>Dostawca</h4>
+    <hr/>
+    <p>
+        @Html.ActionLink("Powrót", "Index", null, new { @class = "btn btn-default" })
+    </p>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nazwa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nazwa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Miejscowosc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Miejscowosc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Kod)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Kod)
-        </dd>
-
-    </dl>
 </div>
-<p>
-    @Html.ActionLink("Edycja", "Edit", new { id = Model.Id_Dostawcy }) |
-    @Html.ActionLink("Powrót", "Index")
-</p>
+
+<table class="table">
+    <tr class="breadcrumb">
+        <th>
+           Nazwa
+        </th>
+        <th>
+            Kod
+        </th>
+        <th>
+            Miejsce
+        </th>
+        <th>
+            Stan
+        </th>
+        <th>
+            Jednostka
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Where(x=>x.Id_Dostawcy == ViewBag.Id))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nazwa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Miejsce)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JM.Nazwa)
+            </td>
+        </tr>
+    }
+
+</table>
+<hr />
+Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Details", new { page, ViewBag.Id }))

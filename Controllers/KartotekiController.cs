@@ -199,5 +199,6 @@ namespace PartsWarehouse.Controllers
         {
             return RedirectToAction("Create", "Przyjecia", new { id = id });
         }
+
     }
 }

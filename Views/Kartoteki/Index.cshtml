@@ -46,29 +46,61 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nazwa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Kod)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Miejsce)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.JM.Nazwa)
-            </td>
 
-            <td class="text-center">
-                @Html.ActionLink("Szczegóły", "Details", new { id = item.Id_Kartoteki }, new { @class = "btn btn-default btn-sm" })
-                @Html.ActionLink("Wydanie", "NewWydanie", new { id = item.Id_Kartoteki }, new { @class = "btn btn-default btn-sm" })
-                @Html.ActionLink("Przyjęcie", "NewPrzyjecie", new { id = item.Id_Kartoteki }, new { @class = "btn btn-default btn-sm" })
-            </td>
-        </tr>
+        if (item.Niski_Stan >= item.Stan)
+        {
+            <tr class="bg-danger">
+                <td>
+                    <p class="glyphicon glyphicon-warning-sign"></p>
+                    @Html.DisplayFor(modelItem => item.Nazwa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Miejsce)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JM.Nazwa)
+                </td>
+
+                <td class="text-center">
+                    @Html.ActionLink("Szczegóły", "Details", new { id = item.Id_Kartoteki }, new { @class = "btn btn-default btn-sm" })
+                    @Html.ActionLink("Wydanie", "NewWydanie", new { id = item.Id_Kartoteki }, new { @class = "btn btn-default btn-sm" })
+                    @Html.ActionLink("Przyjęcie", "NewPrzyjecie", new { id = item.Id_Kartoteki }, new { @class = "btn btn-default btn-sm" })
+                </td>
+            </tr>
+        }
+        if (item.Niski_Stan < item.Stan)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nazwa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Miejsce)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JM.Nazwa)
+                </td>
+
+                <td class="text-center">
+                    @Html.ActionLink("Szczegóły", "Details", new { id = item.Id_Kartoteki }, new { @class = "btn btn-default btn-sm" })
+                    @Html.ActionLink("Wydanie", "NewWydanie", new { id = item.Id_Kartoteki }, new { @class = "btn btn-default btn-sm" })
+                    @Html.ActionLink("Przyjęcie", "NewPrzyjecie", new { id = item.Id_Kartoteki }, new { @class = "btn btn-default btn-sm" })
+                </td>
+            </tr>
+        }
+
     }
 
 </table>

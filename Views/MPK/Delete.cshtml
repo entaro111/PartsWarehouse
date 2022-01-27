@@ -3,30 +3,32 @@
 @{
     ViewBag.Title = "Miejsce kosztów - usuwanie";
 }
-
-<h2>Usuń</h2>
-
-<h3>Jesteś pewny, że chcesz usunąć to miejsce?</h3>
-<div>
+<div class="text-center">
+    <h2>Usuń</h2>
     <h4>Miejsce powstawania kosztów</h4>
     <hr />
+    <h3>Jesteś pewny, że chcesz usunąć to miejsce?</h3>
+    <hr />
+</div>
+
+<div class="detailed-list">
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Nazwa)
+            @Html.DisplayNameFor(model => model.Nazwa):
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Nazwa)
         </dd>
-
     </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Usuń" class="btn btn-default" /> |
-            @Html.ActionLink("Powrót", "Index")
-        </div>
-    }
 </div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color text-center">
+        <input type="submit" value="Usuń" class="btn btn-danger" />
+        @Html.ActionLink("Powrót", "Index", null, new { @class = "btn btn-default"})
+    </div>
+}
+<br/>

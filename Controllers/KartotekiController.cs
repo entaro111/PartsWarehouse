@@ -153,6 +153,10 @@ namespace PartsWarehouse.Controllers
         {
             Kartoteki kartoteki = db.Kartoteki.Find(id);
             db.Kartoteki.Remove(kartoteki);
+            var wydania = db.Wydania.Where(x => x.Id_Kartoteki == id);
+            db.Wydania.RemoveRange(wydania);
+            var przyjecia = db.Przyjecia.Where(x => x.Id_Kartoteki == id);
+            db.Przyjecia.RemoveRange(przyjecia);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

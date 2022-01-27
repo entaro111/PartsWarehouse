@@ -1,11 +1,16 @@
-﻿@model PartsWarehouse.Models.Osoby
+﻿@model PagedList.IPagedList<PartsWarehouse.Models.Wydania>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Pracownik - szczegóły";
+    ViewBag.Title = "Pracownik - lista pobrań";
 }
 <div class="text-center">
-    <h2>Szczegóły</h2>
-    <h4>Osoby</h4>
+    <h2>
+        @Model.FirstOrDefault(x => x.Id_Wydania == ViewBag.Id).Osoby.Imie
+        @Model.FirstOrDefault(x => x.Id_Wydania == ViewBag.Id).Osoby.Nazwisko
+    </h2>
+    <h4>Lista pobrań</h4>
     <hr />
     <p>
         @Html.ActionLink("Powrót", "Index", null, new { @class = "btn btn-default" })
@@ -13,60 +18,43 @@
     <hr />
 </div>
 
-<div class="detailed-list">
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Imie):
-        </dt>
+<table class="table">
+    <tr class="breadcrumb">
+        <th>
+            Data Wydania
+        </th>
+        <th>
+            Nazwa części
+        </th>
+        <th>
+            Ilość
+        </th>
+        <th>
+            Miejsce
+        </th>
+    </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.Imie)
-        </dd>
+    @foreach (var item in Model.Where(x=>x.Id_Osoby == ViewBag.Id))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data_Wydania)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kartoteki.Nazwa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ilosc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MPK.Nazwa)
+            </td>
+        </tr>
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Nazwisko):
-        </dt>
+</table>
+<hr />
+Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
 
-        <dd>
-            @Html.DisplayFor(model => model.Nazwisko)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Dzialy.Nazwa):
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Dzialy.Nazwa)
-        </dd>
-
-    </dl>
-
-</div>
-@if (Model.Wydania.Count > 0)
-{
-    <div>
-        <hr />
-        <table class="table">
-            <tr class="bg-warning">
-                <th>Część</th>
-                <th>Ilość</th>
-                <th>Data wydania</th>
-            </tr>
-            @foreach (var item in (List<PartsWarehouse.Models.Wydania>)ViewBag.LastWydania)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Kartoteki.Nazwa)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelIte => item.Ilosc)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Data_Wydania)
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
-}
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 

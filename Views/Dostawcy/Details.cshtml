@@ -5,9 +5,9 @@
     ViewBag.Title = "Dostawca - Lista części";
 }
 <div class="text-center">
-    <h2>Szczegóły</h2>
-    <h4>Dostawca</h4>
-    <hr/>
+    <h2>@Model.FirstOrDefault(x => x.Id_Dostawcy == ViewBag.Id).Dostawcy.Nazwa</h2>
+    <h4>Lista części</h4>
+    <hr />
     <p>
         @Html.ActionLink("Powrót", "Index", null, new { @class = "btn btn-default" })
     </p>

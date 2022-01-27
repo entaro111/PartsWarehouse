@@ -13,7 +13,7 @@ namespace PartsWarehouse.Controllers
 {
     public class ZamowieniaController : Controller
     {
-        private MagazynDBEntities db = new MagazynDBEntities();
+        private readonly MagazynDBEntities db = new MagazynDBEntities();
         // GET: Zamowienia
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {

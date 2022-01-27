@@ -13,7 +13,7 @@ namespace PartsWarehouse.Controllers
 {
     public class MPKController : Controller
     {
-        private MagazynDBEntities db = new MagazynDBEntities();
+        private readonly MagazynDBEntities db = new MagazynDBEntities();
 
         // GET: MPK
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)

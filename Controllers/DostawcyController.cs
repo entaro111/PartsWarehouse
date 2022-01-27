@@ -13,7 +13,7 @@ namespace PartsWarehouse.Controllers
 {
     public class DostawcyController : Controller
     {
-        private MagazynDBEntities db = new MagazynDBEntities();
+        private readonly MagazynDBEntities db = new MagazynDBEntities();
 
         // GET: Dostawcy
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)

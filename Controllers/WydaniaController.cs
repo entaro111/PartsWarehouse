@@ -13,7 +13,7 @@ namespace PartsWarehouse.Controllers
 {
     public class WydaniaController : Controller
     {
-        private MagazynDBEntities db = new MagazynDBEntities();
+        private readonly MagazynDBEntities db = new MagazynDBEntities();
         private static Wydania wydaniePrzedEdycja;
         // GET: Wydania
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
@@ -21,7 +21,6 @@ namespace PartsWarehouse.Controllers
             ViewBag.CurrentSort = sortOrder;
             ViewBag.DateSortParam = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
             ViewBag.NameSortParam = sortOrder == "Name" ? "Name_desc" : "Name";
-            
 
             if (searchString != null)
             {
@@ -32,9 +31,7 @@ namespace PartsWarehouse.Controllers
                 searchString = currentFilter;
             }
             ViewBag.CurrentFilter = searchString;
-
             var wydania = db.Wydania.Include(w => w.Kartoteki).Include(w => w.MPK).Include(w => w.Osoby);
-
             if (!String.IsNullOrEmpty(searchString))
             {
                 wydania = wydania.Where(w => w.Kartoteki.Nazwa.ToUpper().Contains(searchString.ToUpper()) || w.Osoby.Nazwisko.ToUpper().Contains(searchString.ToUpper()));
@@ -56,7 +53,6 @@ namespace PartsWarehouse.Controllers
             }
             int pageSize = 10;
             int pageNumber = (page ?? 1);
-
             return View(wydania.ToPagedList(pageNumber, pageSize));
         }
 

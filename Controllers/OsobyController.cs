@@ -11,7 +11,7 @@ namespace PartsWarehouse.Controllers
 {
     public class OsobyController : Controller
     {
-        private MagazynDBEntities db = new MagazynDBEntities();
+        private readonly MagazynDBEntities db = new MagazynDBEntities();
 
         // GET: Osoby
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)

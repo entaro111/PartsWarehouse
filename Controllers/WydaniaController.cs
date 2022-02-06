@@ -34,7 +34,7 @@ namespace PartsWarehouse.Controllers
             var wydania = db.Wydania.Include(w => w.Kartoteki).Include(w => w.MPK).Include(w => w.Osoby);
             if (!String.IsNullOrEmpty(searchString))
             {
-                wydania = wydania.Where(w => w.Kartoteki.Nazwa.ToUpper().Contains(searchString.ToUpper()) || w.Osoby.Nazwisko.ToUpper().Contains(searchString.ToUpper()));
+                wydania = wydania.Where(w => w.Kartoteki.Nazwa.ToUpper().Contains(searchString.ToUpper()));
             }
             switch (sortOrder)
             {
@@ -182,7 +182,6 @@ namespace PartsWarehouse.Controllers
             {
                 kartoteka.Stan -= wydanie.Ilosc;
             }
-
         }
 
         private int CalculateNewAmount(Wydania wydanie, Wydania wydaniePrzedEdycja)

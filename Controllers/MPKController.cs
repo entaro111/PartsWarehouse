@@ -53,18 +53,16 @@ namespace PartsWarehouse.Controllers
         }
 
         // GET: MPK/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, int? page)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MPK mPK = db.MPK.Find(id);
-            if (mPK == null)
-            {
-                return HttpNotFound();
-            }
-            return View(mPK);
+            page = 1;
+            var wydania = db.Wydania.Include(w => w.Kartoteki).Include(w => w.MPK).Include(w => w.Osoby);
+            wydania = wydania.Where(w => w.Id_MPK == id);
+            wydania = wydania.OrderByDescending(w => w.Data_Wydania);
+            ViewBag.Id = id;
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(wydania.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: MPK/Create

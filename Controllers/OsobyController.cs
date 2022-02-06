@@ -34,7 +34,7 @@ namespace PartsWarehouse.Controllers
             var osoby = db.Osoby.Include(o => o.Dzialy);
             if (!String.IsNullOrEmpty(searchString))
             {
-                osoby = osoby.Where(o => o.Nazwisko.ToUpper().Contains(searchString.ToUpper()) || o.Imie.ToUpper().Contains(searchString.ToUpper()));
+                osoby = osoby.Where(o => o.Nazwisko.ToUpper().Contains(searchString.ToUpper()));
             }
             switch (sortOrder)
             {

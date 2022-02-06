@@ -275,6 +275,7 @@
     <Content Include="Views\Przyjecia\Delete.cshtml" />
     <Content Include="Views\Przyjecia\Edit.cshtml" />
     <Content Include="Views\Przyjecia\Index.cshtml" />
+    <Content Include="Views\MPK\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

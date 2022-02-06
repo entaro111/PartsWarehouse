@@ -1,0 +1,59 @@
+﻿@model PagedList.IPagedList<PartsWarehouse.Models.Wydania>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "MPK - lista pobrań";
+}
+<div class="text-center">
+    <h2>
+        @Model.FirstOrDefault(x => x.Id_MPK == ViewBag.Id).MPK.Nazwa
+    </h2>
+    <h4>Lista pobrań</h4>
+    <hr />
+    <p>
+        @Html.ActionLink("Powrót", "Index", null, new { @class = "btn btn-default" })
+    </p>
+    <hr />
+</div>
+
+<table class="table">
+    <tr class="breadcrumb">
+        <th>
+            Data Wydania
+        </th>
+        <th>
+            Nazwa części
+        </th>
+        <th>
+            Ilość
+        </th>
+        <th>
+            Miejsce
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Where(x=>x.Id_MPK == ViewBag.Id))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data_Wydania)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kartoteki.Nazwa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ilosc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MPK.Nazwa)
+            </td>
+        </tr>
+    }
+
+</table>
+<hr />
+Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+

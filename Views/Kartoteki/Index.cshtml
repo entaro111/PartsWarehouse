@@ -29,24 +29,14 @@
         <th>
             @Html.ActionLink("Nazwa", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
         </th>
-        <th>
-            Kod
-        </th>
-        <th>
-            Miejsce
-        </th>
-        <th>
-            Stan
-        </th>
-        <th>
-            Jednostka
-        </th>
+        <th>Kod</th>
+        <th>Miejsce</th>
+        <th>Stan</th>
+        <th>Jednostka</th>
         <th></th>
     </tr>
-
     @foreach (var item in Model)
     {
-
         if (item.Niski_Stan >= item.Stan)
         {
             <tr class="bg-warning">
@@ -66,7 +56,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.JM.Nazwa)
                 </td>
-
                 <td class="text-center">
                     @Html.ActionLink("Szczegóły", "Details", new { id = item.Id_Kartoteki }, new { @class = "btn btn-default btn-sm" })
                     @Html.ActionLink("Wydanie", "NewWydanie", new { id = item.Id_Kartoteki }, new { @class = "btn btn-default btn-sm" })
@@ -100,9 +89,7 @@
                 </td>
             </tr>
         }
-
     }
-
 </table>
 <hr />
 Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount

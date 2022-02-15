@@ -7,7 +7,7 @@
 }
 <div class="text-center">
     <h2>
-        @Model.FirstOrDefault(x => x.Id_MPK == ViewBag.Id).MPK.Nazwa
+        @ViewBag.MPK.Nazwa
     </h2>
     <h4>Lista pobrań</h4>
     <hr />
@@ -33,7 +33,7 @@
         </th>
     </tr>
 
-    @foreach (var item in Model.Where(x=>x.Id_MPK == ViewBag.Id))
+    @foreach (var item in Model.Where(x=>x.Id_MPK == ViewBag.MPK.Id_MPK))
     {
         <tr>
             <td>

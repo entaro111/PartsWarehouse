@@ -59,7 +59,7 @@ namespace PartsWarehouse.Controllers
             var wydania = db.Wydania.Include(w => w.Kartoteki).Include(w => w.MPK).Include(w => w.Osoby);
             wydania = wydania.Where(w => w.Id_MPK == id);
             wydania = wydania.OrderByDescending(w => w.Data_Wydania);
-            ViewBag.Id = id;
+            ViewBag.MPK = db.MPK.Find(id);
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(wydania.ToPagedList(pageNumber, pageSize));

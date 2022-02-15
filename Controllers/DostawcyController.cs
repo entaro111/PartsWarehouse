@@ -59,7 +59,7 @@ namespace PartsWarehouse.Controllers
             var kartoteki = db.Kartoteki.Include(k => k.Dostawcy).Include(k => k.JM);
             kartoteki = kartoteki.Where(k => k.Dostawcy.Id_Dostawcy == id);
             kartoteki = kartoteki.OrderBy(k => k.Nazwa);
-            ViewBag.Id = id;
+            ViewBag.Dostawca = db.Dostawcy.Find(id);
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(kartoteki.ToPagedList(pageNumber, pageSize));

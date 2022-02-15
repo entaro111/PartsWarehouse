@@ -13,30 +13,14 @@
 
 <div class="detailed-list">
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nazwa):
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nazwa)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Miejsce):
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Miejsce)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Kod):
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Kod)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Dostawcy.Nazwa):
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Dostawcy.Nazwa)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.Nazwa):</dt>
+        <dd>@Html.DisplayFor(model => model.Nazwa)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Miejsce):</dt>
+        <dd>@Html.DisplayFor(model => model.Miejsce)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Kod):</dt>
+        <dd>@Html.DisplayFor(model => model.Kod)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Dostawcy.Nazwa):</dt>
+        <dd>@Html.DisplayFor(model => model.Dostawcy.Nazwa)</dd>
     </dl>
 </div>
 
@@ -49,4 +33,4 @@
         @Html.ActionLink("Powrót", "Index", null, new { @class = "btn btn-default" })
     </div>
 }
-<br/>
+<br />

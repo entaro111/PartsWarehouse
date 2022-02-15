@@ -18,62 +18,20 @@
 
 <div class="detailed-list">
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nazwa):
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nazwa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Kod):
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Kod)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Miejsce):
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Miejsce)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Stan):
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Stan)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Niski_Stan):
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Niski_Stan)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.JM.Nazwa):
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.JM.Nazwa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Dostawcy.Nazwa):
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Dostawcy.Nazwa)
-        </dd>
-
+        <dt>@Html.DisplayNameFor(model => model.Nazwa):</dt>
+        <dd>@Html.DisplayFor(model => model.Nazwa)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Kod):</dt>
+        <dd>@Html.DisplayFor(model => model.Kod)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Miejsce):</dt>
+        <dd>@Html.DisplayFor(model => model.Miejsce)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Stan):</dt>
+        <dd>@Html.DisplayFor(model => model.Stan)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Niski_Stan):</dt>
+        <dd>@Html.DisplayFor(model => model.Niski_Stan)</dd>
+        <dt>@Html.DisplayNameFor(model => model.JM.Nazwa):</dt>
+        <dd>@Html.DisplayFor(model => model.JM.Nazwa)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Dostawcy.Nazwa):</dt>
+        <dd>@Html.DisplayFor(model => model.Dostawcy.Nazwa)</dd>
     </dl>
 </div>
 @if (Model.Wydania.Count != 0)

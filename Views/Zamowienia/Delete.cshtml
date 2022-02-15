@@ -13,36 +13,14 @@
 
 <div class="detailed-list">
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Data_zamowienia):
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Data_zamowienia)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Realizacja):
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Realizacja)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ilosc):
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ilosc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Kartoteki.Nazwa):
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Kartoteki.Nazwa)
-        </dd>
+        <dt>@Html.DisplayNameFor(model => model.Data_zamowienia):</dt>
+        <dd>@Html.DisplayFor(model => model.Data_zamowienia)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Realizacja):</dt>
+        <dd>@Html.DisplayFor(model => model.Realizacja)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Ilosc):</dt>
+        <dd>@Html.DisplayFor(model => model.Ilosc)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Kartoteki.Nazwa):</dt>
+        <dd>@Html.DisplayFor(model => model.Kartoteki.Nazwa)</dd>
     </dl>
 </div>
 @using (Html.BeginForm())

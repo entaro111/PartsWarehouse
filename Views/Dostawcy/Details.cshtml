@@ -5,7 +5,7 @@
     ViewBag.Title = "Dostawca - Lista części";
 }
 <div class="text-center">
-    <h2>@Model.FirstOrDefault(x => x.Id_Dostawcy == ViewBag.Id).Dostawcy.Nazwa</h2>
+    <h2>@ViewBag.Dostawca.Nazwa</h2>
     <h4>Lista części</h4>
     <hr />
     <p>
@@ -33,7 +33,7 @@
         </th>
     </tr>
 
-    @foreach (var item in Model.Where(x=>x.Id_Dostawcy == ViewBag.Id))
+    @foreach (var item in Model.Where(x=>x.Id_Dostawcy == ViewBag.Dostawca.Id_Dostawcy))
     {
         <tr>
             <td>

@@ -10,7 +10,8 @@ namespace PartsWarehouse.Models
         [Required(ErrorMessage = "Podaj nazwę dostawcy")]
         [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
         [Display(Name ="Dostawca")]
-        public string Nazwa;
+        [Remote("nameExist", "Dostawcy", AdditionalFields ="Id_Dostawcy", HttpMethod = "POST", ErrorMessage = "Nazwa już istnieje")]
+        public string Nazwa { get; set; }
         [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
         [Display(Name = "Miejscowość")]
         public string Miejscowosc;
@@ -62,7 +63,8 @@ namespace PartsWarehouse.Models
         [Required(ErrorMessage = "Podaj miejsce użycia części")]
         [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
         [Display(Name = "Miejsce")]
-        public string Nazwa;
+        [Remote("nameExist", "MPK", AdditionalFields = "Id_MPK", HttpMethod = "POST", ErrorMessage = "Nazwa już istnieje")]
+        public string Nazwa { get; set; }
     }
 
     public class OsobyMetadata
@@ -73,7 +75,8 @@ namespace PartsWarehouse.Models
         public string Imie;
         [Required(ErrorMessage = "Podaj nazwisko")]
         [StringLength(50, ErrorMessage = "Maksymalnie 50 znaków")]
-        public string Nazwisko;
+        [Remote("fullNameExist", "Osoby", AdditionalFields = "Imie, Id_Osoby", HttpMethod = "POST", ErrorMessage = "Osoba o takim imieniu i nazwisku już istnieje")]
+        public string Nazwisko { get; set; }
     }
 
     public class PrzyjeciaMetadata

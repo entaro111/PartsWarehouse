@@ -162,5 +162,16 @@ namespace PartsWarehouse.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public JsonResult fullNameExist(string Nazwisko, string Imie, int? Id_Osoby)
+        {
+            return Json(IsFullNameUnique(Nazwisko, Imie, Id_Osoby));
+        }
+
+        private bool IsFullNameUnique(string Surname, string Name, int? id)
+        {
+            if (id == 0) return !db.Osoby.Any(x => x.Imie == Name && x.Nazwisko == Surname);
+            else return !db.Osoby.Any(x => x.Imie == Name && x.Nazwisko == Surname && x.Id_Osoby != id);
+        }
     }
 }

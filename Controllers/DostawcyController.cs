@@ -154,5 +154,17 @@ namespace PartsWarehouse.Controllers
             base.Dispose(disposing);
         }
 
+        [HttpPost]
+        public JsonResult nameExist(string nazwa, int? Id_Dostawcy)
+        {
+            return Json(IsNameUnique(nazwa, Id_Dostawcy));
+        }
+
+        private bool IsNameUnique(string Name, int? id)
+        {
+            if (id == 0) return !db.Dostawcy.Any(x => x.Nazwa == Name);
+            else return !db.Dostawcy.Any(x => x.Nazwa == Name && x.Id_Dostawcy != id);
+        }
+
     }
 }

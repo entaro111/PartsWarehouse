@@ -153,5 +153,18 @@ namespace PartsWarehouse.Controllers
             }
             base.Dispose(disposing);
         }
+
+        [HttpPost]
+        public JsonResult nameExist(string Nazwa, int? Id_MPK)
+        {
+
+            return Json(IsNameUnique(Nazwa, Id_MPK));
+
+        }
+        private bool IsNameUnique(string Name, int? id)
+        {
+            if (id == 0) return !db.MPK.Any(x => x.Nazwa == Name);
+            else return !db.MPK.Any(x => x.Nazwa == Name && x.Id_MPK != id);
+        }
     }
 }
